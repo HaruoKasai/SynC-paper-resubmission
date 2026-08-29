@@ -341,7 +341,7 @@ export default function StatisticalTestsPage() {
             and positive-response distributions overlap, classification using
             a single binary threshold would be sensitive to the choice of
             threshold. Figure 6h therefore complements this analysis by using a
-            Normal-Exponential mixture model to estimate the condition-specific
+            Normal-Exponential (Ex-Gaussian) mixture model to estimate the condition-specific
             permissive fraction. Between-condition tests directly compare this
             fitted fraction by re-estimating it after each group-label
             permutation. Thus, Figure 6g tests the continuous
@@ -384,7 +384,7 @@ export default function StatisticalTestsPage() {
 
         <section>
           <p className="sectionLabel">Figure 6h · Permissive fraction</p>
-          <h2>Normal-Exponential mixture-fraction permutation</h2>
+          <h2>Normal-Exponential (Ex-Gaussian) mixture-fraction permutation</h2>
           <p>
             A zero-centred Normal null distribution was estimated from all
             pooled neighbouring spines (σ = 9.374%). The positive latent

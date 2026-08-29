@@ -17,7 +17,7 @@ reproducible Python scripts supporting the SynC manuscript.
 - **Figure 6g:** 40-80-s mean spine-volume change analysed at the individual-
   spine level with two-sided studentized permutation tests and a prespecified
   fixed sequence for the two SynC contrasts.
-- **Figure 6h / Extended Data Figure 10:** Normal-Exponential mixture model,
+- **Figure 6h / Extended Data Figure 10:** Normal-Exponential (Ex-Gaussian) mixture model,
   condition-specific mixture fractions, direct studentized permutation tests
   of re-estimated mixture fractions, and distributional audit.
 

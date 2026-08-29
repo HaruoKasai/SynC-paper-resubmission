@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the frozen Extended Data Fig. 10 Normal-Exponential mixture.
+"""Audit the frozen Extended Data Fig. 10 Normal-Exponential (Ex-Gaussian) mixture.
 
 The latent positive component is Exponential because the fitted Gamma shape is
 exactly one. The displayed positive density is its convolution with the

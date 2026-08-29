@@ -173,7 +173,7 @@ const scripts = [
     detailHref: "/statistical-tests#fig6-spine-analysis",
     detailLabel: "Read the method description →",
     label: "Extended Data Figure 10",
-    name: "Normal-Exponential mixture audit",
+    name: "Normal-Exponential (Ex-Gaussian) mixture audit",
     description:
       "Recalculates the Normal and positive-response densities, verifies each spine's posterior permissive probability, and reproduces condition-specific π values from the frozen 40-80-s endpoints. The Fig. 6h hypothesis tests are provided in the Fig. 6g,h permutation script above.",
     files: [

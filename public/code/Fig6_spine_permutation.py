@@ -4,7 +4,7 @@
 Fig. 6g compares the continuous 40-80-s Delta V endpoint with a Welch-type
 studentized difference in means. Fig. 6h compares the condition-specific
 mixture fraction pi from the frozen Extended Data Fig. 10 Normal-Exponential
-model. For Fig. 6h, group labels are permuted and pi is re-estimated for both
+(Ex-Gaussian) model. For Fig. 6h, group labels are permuted and pi is re-estimated for both
 groups in every permutation; the pi difference is studentized by the observed
 information of the two fitted mixture fractions.
 

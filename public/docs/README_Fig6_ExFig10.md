@@ -20,7 +20,7 @@ SHA-256 hashes of the internal frozen inputs are:
 | `spine_endpoint_40_80_and_posterior.csv` | `BC47A7E3231DA81491172E25C12652B970845424FBDB1402718B0CC9D832FC47` |
 | `mixture_parameters.csv` | `E431E8CB0D6B6ED84EF4AF0607AC3F2860BBB0D975A333ADECE2581A5827336E` |
 | 100,000-permutation two-sided result CSV | `3CEE417B8F3D19B66D41DBDE0BE798E048224AF1B9E4B450168819A626EB246F` |
-| Adopted Fig. 6g,h permutation script | `46556D024E2F9D12D0738256FAA8E195DE3D38354665A0B0789295E80C994364` |
+| Adopted Fig. 6g,h permutation script | `63426A53429FF9A57B7A0D0B595ECCAD1F1E1CA56492EE1F050D670FDAE5CD80` |
 
 The public CSVs exclude local filesystem paths and redundant internal columns.
 Original mouse, FOV, and spine labels are replaced by stable opaque aliases.
@@ -78,7 +78,7 @@ SynC-dGAP@FPC contrasts are descriptive and unadjusted.
 | SynC-dGAP@FPC before A/C vs 0–1 h after A/C | 0.849 |
 | SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C | 0.882 |
 
-## Figure 6h and Extended Data Figure 10: mixture model
+## Figure 6h and Extended Data Figure 10: Normal-Exponential (Ex-Gaussian) mixture model
 
 The pooled neighbouring-spine endpoints define a zero-centred Normal null with
 sigma = 9.3740%. The latent positive component is Gamma with fitted shape 1.0;
