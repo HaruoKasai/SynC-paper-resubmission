@@ -97,9 +97,10 @@ test("server-renders the analysis resource routes", async () => {
   }
 });
 
-test("homepage lists all authors, figure subtitles, and resampling last", async () => {
+test("homepage lists all authors and consolidates resampling resources last", async () => {
   const response = await render("/");
   const html = await response.text();
+  const source = await readFile(new URL("app/page.tsx", root), "utf8");
 
   for (const author of [
     "Siqi Zhou",
@@ -123,9 +124,11 @@ test("homepage lists all authors, figure subtitles, and resampling last", async 
   assert.match(html, /Figure 4c/);
   assert.match(html, /Extended Data Figure 4h–k/);
   assert.match(html, /Extended Data Figure 8/);
-  assert.ok(
-    html.lastIndexOf("Resampling statistics") > html.lastIndexOf("Statistical analysis"),
-  );
+  assert.doesNotMatch(html, /Imaging analysis/);
+  assert.equal((source.match(/title: "Resampling statistics"/g) ?? []).length, 1);
+  assert.doesNotMatch(source, /<h3>Statistical analysis<\/h3>/);
+  assert.match(html, /Figures 4e, 4g, 5, 6g,h/);
+  assert.ok(source.lastIndexOf("resamplingItem.href") > source.lastIndexOf("codeItems.map"));
 });
 
 test("publishes the Extended Data Figure 4 MATLAB package", async () => {

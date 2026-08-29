@@ -24,14 +24,6 @@ const codeItems = [
     href: "/matlab-code",
   },
   {
-    title: "Imaging analysis",
-    figure: "Figure 6g,h · Extended Data Figure 10",
-    description:
-      "Methods, frozen spine-level source tables, and permutation code for Fig. 6g,h and the Extended Data Fig. 10 mixture model.",
-    status: "View Fig. 6 resources →",
-    href: "/statistical-tests#fig6-spine-analysis",
-  },
-  {
     title: "Behavioural analysis",
     figure: "Extended Data Figure 8",
     description:
@@ -43,11 +35,11 @@ const codeItems = [
 
 const resamplingItem = {
   title: "Resampling statistics",
-  figure: "Figures 4e and 4g",
+  figure: "Figures 4e, 4g, 5, 6g,h · Extended Data Figure 10",
   description:
-    "Mouse- and animal-level exact permutation inputs, code, and Romano–Wolf step-down maxT results, with dependence and studentization choices recorded explicitly.",
-  status: "View Fig. 4e and 4g resources →",
-  href: "/statistical-tests#fig4e-signflip",
+    "Statistical definitions, frozen inputs, code, and results for mouse-, animal-, population-, and spine-level resampling analyses, with dependence, studentization, fixed-sequence, and step-down maxT choices recorded explicitly.",
+  status: "View statistical resources →",
+  href: "/statistical-tests",
 };
 
 export default function Home() {
@@ -126,22 +118,6 @@ export default function Home() {
               </a>
             );
           })}
-          <div className="statisticalItem">
-            <div>
-              <h3>Statistical analysis</h3>
-              <p className="itemFigure">
-                Figures 4e, 4g, 5, 6g,h · Extended Data Figure 10
-              </p>
-              <p>
-                Descriptions of the statistical tests and the corresponding
-                Python scripts used in the manuscript.
-              </p>
-            </div>
-            <div className="codeActions">
-              <a href="/statistical-tests">Test descriptions →</a>
-              <a href="/python-code">Python scripts →</a>
-            </div>
-          </div>
           <a href={resamplingItem.href}>
             <div>
               <h3>{resamplingItem.title}</h3>
