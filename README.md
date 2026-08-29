@@ -5,6 +5,10 @@ reproducible Python scripts supporting the SynC manuscript.
 
 ## Published analyses
 
+- **Extended Data Figure 4h-k:** MATLAB plotting and non-parametric analysis of
+  visual-cortex calcium traces, orientation-selective cell counts, orientation
+  selectivity index, and preferred-orientation stability, paired with the
+  frozen source-data workbook.
 - **Figure 4e:** exact mouse-level sign-flip tests, including dependence-aware
   Romano-Wolf step-down maxT adjustment across the plotted groups and the paired
   first-versus-second A/C comparison.
@@ -21,9 +25,10 @@ reproducible Python scripts supporting the SynC manuscript.
   condition-specific mixture fractions, direct studentized permutation tests
   of re-estimated mixture fractions, and distributional audit.
 
-The website provides method summaries under `/statistical-tests` and direct
-downloads under `/python-code`. Analysis-specific provenance and execution
-instructions are stored in `public/docs/`.
+The website provides method summaries under `/statistical-tests`, MATLAB
+resources under `/matlab-code`, and direct Python downloads under
+`/python-code`. Analysis-specific provenance and execution instructions are
+stored in `public/docs/`.
 
 ## Local development
 
@@ -42,7 +47,7 @@ npm test
 
 ## Reproducibility files
 
-- `public/code/`: Python analysis and audit scripts.
+- `public/code/`: MATLAB and Python analysis and audit scripts.
 - `public/data/`: public, path-sanitised input and reported-result CSVs.
 - `public/docs/`: methods, model definitions, seeds, replicate counts, source
   hashes, and adopted fixed-run results.

@@ -22,6 +22,13 @@ const codeItems = [
     href: "/statistical-tests#fig4e-signflip",
   },
   {
+    title: "Visual-cortex analysis",
+    description:
+      "MATLAB plotting and statistical analysis for Extended Data Fig. 4h–k, paired with the frozen source-data workbook used for the resubmission.",
+    status: "View MATLAB code and data →",
+    href: "/matlab-code",
+  },
+  {
     title: "Imaging analysis",
     description:
       "Methods, frozen spine-level source tables, and permutation code for Fig. 6g,h and the Extended Data Fig. 10 mixture model.",
@@ -51,6 +58,7 @@ export default function Home() {
           <a href="#code">Code</a>
           <a href="/statistical-tests">Statistics</a>
           <a href="/python-code">Python code</a>
+          <a href="/matlab-code">MATLAB code</a>
         </div>
       </nav>
 

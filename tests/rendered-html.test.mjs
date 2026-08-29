@@ -34,7 +34,9 @@ async function serveBuiltAsset(request) {
       js: "text/javascript; charset=utf-8",
       json: "application/json; charset=utf-8",
       md: "text/markdown; charset=utf-8",
+      m: "text/plain; charset=utf-8",
       py: "text/x-python; charset=utf-8",
+      xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       zip: "application/zip",
     };
     return new Response(body, {
@@ -82,6 +84,7 @@ test("server-renders the analysis resource routes", async () => {
     ["/", /Rapid associative spine enlargement/],
     ["/statistical-tests", /Two-sided spine-level studentized permutation/],
     ["/python-code", /EEG\/EMG preprocessing and spectral analysis/],
+    ["/matlab-code", /MATLAB code and source data for Extended Data Figure 4/],
   ];
 
   for (const [pathname, expected] of cases) {
@@ -92,6 +95,30 @@ test("server-renders the analysis resource routes", async () => {
     assert.match(html, expected);
     assert.doesNotMatch(html, /Your site is taking shape|codex-preview/);
   }
+});
+
+test("publishes the Extended Data Figure 4 MATLAB package", async () => {
+  const paths = [
+    "public/code/ExtendedDataFig4_plot_code.m",
+    "public/data/ExtendedDataFig4_source_data.xlsx",
+    "public/docs/README_ExtendedDataFig4_visual_analysis.md",
+  ];
+  await Promise.all(paths.map((path) => access(new URL(path, root))));
+
+  const [homePage, matlabPage, matlabCode, readme] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/matlab-code/page.tsx", root), "utf8"),
+    readFile(new URL("public/code/ExtendedDataFig4_plot_code.m", root), "utf8"),
+    readFile(new URL("public/docs/README_ExtendedDataFig4_visual_analysis.md", root), "utf8"),
+  ]);
+
+  assert.match(homePage, /href: "\/matlab-code"/);
+  assert.match(matlabPage, /ExtendedDataFig4_plot_code\.m/);
+  assert.match(matlabPage, /ExtendedDataFig4_source_data\.xlsx/);
+  assert.match(matlabCode, /%% EFig\. 4h/);
+  assert.match(matlabCode, /friedman\(data_raw', 1, 'off'\)/);
+  assert.match(matlabCode, /signrank\(data_raw\(1,:\), data_raw\(2,:\)\)/);
+  assert.match(readme, /Statistics and Machine Learning Toolbox/);
 });
 
 test("publishes the Fig. 4c EEG analysis and synthetic workflow demo", async () => {
