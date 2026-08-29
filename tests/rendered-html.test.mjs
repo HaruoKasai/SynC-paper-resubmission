@@ -125,6 +125,11 @@ test("homepage lists all authors and consolidates resampling resources last", as
   assert.match(html, /Figure 4c/);
   assert.match(html, /Extended Data Figure 4h–k/);
   assert.match(html, /Extended Data Figure 8/);
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/HaruoKasai\/SynC-paper-resubmission"/,
+  );
+  assert.match(html, /GitHub repository ↗/);
   assert.doesNotMatch(html, /Imaging analysis/);
   assert.equal((source.match(/title: "Resampling statistics"/g) ?? []).length, 1);
   assert.doesNotMatch(source, /<h3>Statistical analysis<\/h3>/);

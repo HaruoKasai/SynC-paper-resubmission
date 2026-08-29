@@ -57,6 +57,13 @@ export default function Home() {
           <a href="/statistical-tests">Statistics</a>
           <a href="/python-code">Resampling code</a>
           <a href="/matlab-code">MATLAB code</a>
+          <a
+            href="https://github.com/HaruoKasai/SynC-paper-resubmission"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub repository ↗
+          </a>
         </div>
       </nav>
 
