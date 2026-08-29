@@ -111,7 +111,7 @@ const scripts = [
     detailHref: "/statistical-tests#fig5-permutation",
     detailLabel: "Read the method description →",
     label: "Figure 5",
-    name: "Paired exact sign-flip permutation test",
+    name: "Paired studentized exact sign-flip permutation test",
     description:
       "Reproduces the n = 10 Fig. 5 analysis for firing rate, Spearman pairwise correlation, normalised participation ratio, and normalised PC50 in immobile and mobile periods.",
     files: [

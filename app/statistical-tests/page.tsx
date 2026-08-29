@@ -221,24 +221,26 @@ export default function StatisticalTestsPage() {
 
         <section>
           <p className="sectionLabel">Statistical analysis</p>
-          <h2>Two-sided paired exact sign-flip permutation test</h2>
+          <h2>Two-sided paired studentized exact sign-flip permutation test</h2>
           <p>
             For each mouse, the paired difference was calculated as the
             comparison value minus its Before value. The test statistic was the
-            mean within-mouse difference.
+            mean within-mouse difference divided by its s.e.m.
           </p>
           <div className="equation">
             d<sub>i</sub> = Y<sub>i, comparison</sub> − Y<sub>i, Before</sub>
           </div>
           <div className="equation">
-            T<sub>obs</sub> = (1/n) Σ d<sub>i</sub>
+            T<sub>obs</sub> = d̄ / (s<sub>d</sub>/√n)
           </div>
           <p>
             Under the null hypothesis, the sign of each within-mouse difference
             was considered exchangeable. With n = 10, all 2¹⁰ = 1,024 possible
             sign assignments were enumerated. The exact two-sided P value was
             the proportion of permuted absolute statistics at least as large as
-            the observed absolute statistic.
+            the observed absolute statistic. Studentization leaves these exact
+            P values unchanged because sign flipping preserves Σd<sub>i</sub>²,
+            making the absolute studentized statistic monotonic in |d̄|.
           </p>
           <h3>Comparisons</h3>
           <ol>

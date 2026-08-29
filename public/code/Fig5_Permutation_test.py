@@ -8,7 +8,7 @@ Reproduces the N=10 analysis used for Fig. 5:
 - Conditions: immobile/mobile; Before (-45 to 0 min), After (0 to 45 min),
   and 1 h after (45 to 120 min)
 - Test: two-sided paired exact sign-flip permutation test
-- Statistic: mean within-mouse difference
+- Statistic: studentized mean within-mouse difference
 - Comparisons: After vs Before; 1 h after vs Before
 
 Usage:
@@ -100,22 +100,36 @@ def exact_sign_flip_test(differences: Iterable[float]) -> dict[str, float | int]
         raise ValueError("No finite paired differences supplied.")
 
     observed = float(diff.mean())
-    observed_abs = abs(observed)
     n = diff.size
+    observed_sem = float(diff.std(ddof=1) / math.sqrt(n)) if n > 1 else 0.0
+    observed_studentized = (
+        observed / observed_sem
+        if observed_sem > 0
+        else (0.0 if observed == 0 else math.copysign(math.inf, observed))
+    )
+    observed_abs = abs(observed_studentized)
     total = 2 ** n
     extreme = 0
 
     for signs in itertools.product((-1.0, 1.0), repeat=n):
-        statistic = abs(float(np.mean(np.asarray(signs) * diff)))
+        permuted = np.asarray(signs) * diff
+        permuted_mean = float(permuted.mean())
+        permuted_sem = (
+            float(permuted.std(ddof=1) / math.sqrt(n)) if n > 1 else 0.0
+        )
+        statistic = abs(
+            permuted_mean / permuted_sem
+            if permuted_sem > 0
+            else (0.0 if permuted_mean == 0 else math.copysign(math.inf, permuted_mean))
+        )
         if statistic >= observed_abs - 1e-15:
             extreme += 1
 
     return {
         "n": n,
         "mean_paired_difference": observed,
-        "sem_paired_difference": (
-            float(diff.std(ddof=1) / math.sqrt(n)) if n > 1 else 0.0
-        ),
+        "sem_paired_difference": observed_sem,
+        "studentized_statistic": observed_studentized,
         "total_sign_assignments": total,
         "extreme_assignments": extreme,
         "exact_p": extreme / total,
@@ -190,6 +204,7 @@ def create_test_tables(
                 "1h_after_sem": one_hour.sem(),
                 "mean_paired_difference": test["mean_paired_difference"],
                 "sem_paired_difference": test["sem_paired_difference"],
+                "studentized_statistic": test["studentized_statistic"],
                 "difference_definition": difference_definition,
                 "total_sign_assignments": test["total_sign_assignments"],
                 "extreme_assignments": test["extreme_assignments"],
@@ -228,8 +243,8 @@ def create_test_tables(
                 "Multiplicity", "Time windows"
             ],
             "definition": [
-                "Two-sided paired exact sign-flip permutation test",
-                "Mean within-mouse difference",
+                "Two-sided paired studentized exact sign-flip permutation test",
+                "Mean within-mouse difference divided by its s.e.m.",
                 f"All 2^{len(mice)} = {2**len(mice):,} sign assignments",
                 "After vs Before; 1 h after vs Before",
                 (

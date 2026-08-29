@@ -12,7 +12,7 @@ reproducible Python scripts supporting the SynC manuscript.
   two-sided Romano-Wolf step-down maxT adjustment; occupancy and feeding use studentized
   mean differences, whereas the discrete laser score uses an unstudentized
   mean difference.
-- **Figure 5:** paired exact sign-flip permutation analysis of population
+- **Figure 5:** paired studentized exact sign-flip permutation analysis of population
   activity.
 - **Figure 6g:** 40-80-s mean spine-volume change analysed at the individual-
   spine level with two-sided studentized permutation tests and a prespecified
