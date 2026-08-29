@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the Figure 4g exact permutation tests and single-step maxT P values."""
+"""Reproduce the Figure 4g exact permutation tests and step-down maxT P values."""
 
 from __future__ import annotations
 
@@ -67,16 +67,20 @@ def exact_test(
     if len(wt_indices) + len(sync_indices) != len(rows):
         raise ValueError("Groups must be WT or SynC")
 
+    observed_signed: list[float] = []
     observed: list[float] = []
     summaries: list[tuple[int, int, float, float]] = []
     for column in range(len(windows)):
         wt = [rows[index][column] for index in wt_indices if rows[index][column] is not None]
         sync = [rows[index][column] for index in sync_indices if rows[index][column] is not None]
-        observed.append(abs(statistic(wt, sync, studentized)))
+        observed_value = statistic(wt, sync, studentized)
+        observed_signed.append(observed_value)
+        observed.append(abs(observed_value))
         summaries.append((len(wt), len(sync), mean(wt), mean(sync)))
 
     raw_exceedances = [0] * len(windows)
-    max_exceedances = [0] * len(windows)
+    order = sorted(range(len(windows)), key=lambda column: observed[column], reverse=True)
+    step_exceedances = [0] * len(windows)
     all_indices = set(range(len(rows)))
     total = 0
     for permuted_wt_tuple in combinations(range(len(rows)), len(wt_indices)):
@@ -87,13 +91,20 @@ def exact_test(
             wt = [rows[index][column] for index in permuted_wt if rows[index][column] is not None]
             sync = [rows[index][column] for index in permuted_sync if rows[index][column] is not None]
             permuted_statistics.append(abs(statistic(wt, sync, studentized)))
-        maximum = max(permuted_statistics)
         for column, observed_value in enumerate(observed):
             if permuted_statistics[column] >= observed_value - 1e-12:
                 raw_exceedances[column] += 1
-            if maximum >= observed_value - 1e-12:
-                max_exceedances[column] += 1
+        for rank, column in enumerate(order):
+            subset_maximum = max(permuted_statistics[index] for index in order[rank:])
+            if subset_maximum >= observed[column] - 1e-12:
+                step_exceedances[rank] += 1
         total += 1
+
+    adjusted = [0.0] * len(windows)
+    cumulative = 0.0
+    for rank, column in enumerate(order):
+        cumulative = max(cumulative, step_exceedances[rank] / total)
+        adjusted[column] = cumulative
 
     output = []
     for column, window in enumerate(windows):
@@ -107,9 +118,9 @@ def exact_test(
                 "WT_mean": wt_mean,
                 "SynC_mean": sync_mean,
                 "statistic_type": "studentized mean difference" if studentized else "unstudentized mean difference",
-                "statistic": observed[column],
+                "statistic": observed_signed[column],
                 "P_unadjusted": raw_exceedances[column] / total,
-                "P_maxT": max_exceedances[column] / total,
+                "P_stepdown_maxT": adjusted[column],
                 "permutations": total,
             }
         )

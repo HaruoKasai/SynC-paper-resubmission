@@ -144,11 +144,17 @@ export default function StatisticalTestsPage() {
           </div>
           <p>
             Multiplicity across post-injection windows was controlled within
-            each analysis using a single-step maxT adjustment. The discrete
+            each analysis using the Romano–Wolf step-down maxT procedure. The discrete
             laser score, which contains frequent ties, used the unstudentized
             difference in means; occupancy and feeding used studentized mean
             differences. Complete enumeration was used, so no random seed was
             required.
+          </p>
+          <p>
+            Step-down maxT P values, in chronological order, were 0.00905,
+            0.000411, 0.00905, and 0.206 for occupancy; 0.0200, 0.00677,
+            0.357, and 0.357 for laser response; and 0.0191 and 0.856 for
+            feeding latency.
           </p>
           <div className="articleLinks">
             <a className="repoLink" href="/python-code#fig4g-permutation">

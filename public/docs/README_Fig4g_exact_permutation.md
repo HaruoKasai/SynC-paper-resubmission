@@ -17,7 +17,7 @@ remain together.
   labels among 15 animals are enumerated.
 
 Two-sided P values use the absolute statistic. Within each analysis, the
-reported multiplicity-adjusted P values use a single-step maxT correction over
+reported multiplicity-adjusted P values use the Romano-Wolf step-down maxT procedure over
 the displayed post-injection time windows. Exact enumeration is used, so no
 random-number seed is required. The pre-injection window was treated as a
 baseline check and was not included in the maxT family.

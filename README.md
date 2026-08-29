@@ -9,7 +9,7 @@ reproducible Python scripts supporting the SynC manuscript.
   Romano-Wolf step-down maxT adjustment across the plotted groups and the paired
   first-versus-second A/C comparison.
 - **Figure 4g:** animal-level exact group-label permutation tests with
-  two-sided single-step maxT adjustment; occupancy and feeding use studentized
+  two-sided Romano-Wolf step-down maxT adjustment; occupancy and feeding use studentized
   mean differences, whereas the discrete laser score uses an unstudentized
   mean difference.
 - **Figure 5:** paired exact sign-flip permutation analysis of population
