@@ -74,7 +74,7 @@ export default function StatisticalTestsPage() {
           <p>
             Cumulative State-C time was tested against zero for all seven
             plotted groups using studentized mouse-level sign-flip statistics
-            and a single-step maxT adjustment. Seven mice contributed both a
+            and a Romano–Wolf step-down maxT adjustment. Seven mice contributed both a
             first- and second-A/C measurement; their two observations shared
             the same sign in every permutation, while the remaining 22
             first-A/C mice were flipped independently.
@@ -86,11 +86,11 @@ export default function StatisticalTestsPage() {
             </div>
             <div>
               <span>First A/C</span>
-              <strong>maxT P = 3.73 × 10⁻⁹</strong>
+              <strong>step-down maxT P = 3.73 × 10⁻⁹</strong>
             </div>
             <div>
               <span>Second A/C</span>
-              <strong>maxT P = 0.0159</strong>
+              <strong>step-down maxT P = 0.0156</strong>
             </div>
           </div>
           <p>

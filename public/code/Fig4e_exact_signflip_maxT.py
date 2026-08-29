@@ -58,6 +58,7 @@ def scaled(value: str) -> int:
 
 
 def exact_joint_maxt(rows: list[dict[str, str]]) -> list[dict[str, str | int | float]]:
+    """Exact Romano-Wolf step-down maxT test for the against-zero family."""
     first_rows = [row for row in rows if row["figure_group"] == FIRST_GROUP]
     second_rows = [row for row in rows if row["figure_group"] == SECOND_GROUP]
     second_by_id = {row["mouse_id"]: scaled(row["state_c_time_min"]) for row in second_rows}
@@ -74,7 +75,7 @@ def exact_joint_maxt(rows: list[dict[str, str]]) -> list[dict[str, str | int | f
 
     first_only_distribution = signed_sum_distribution(first_only)
     exceed_first = 0
-    exceed_second = 0
+    exceed_second_stage = 0
     total = 0
     for signs in product((-1, 1), repeat=len(shared_first)):
         shared_first_sum = sum(sign * value for sign, value in zip(signs, shared_first))
@@ -90,12 +91,17 @@ def exact_joint_maxt(rows: list[dict[str, str]]) -> list[dict[str, str | int | f
                     len(all_first),
                 )
             )
-            maximum = max(first_statistic, second_statistic)
-            if maximum >= observed_first - 1e-12:
+            joint_maximum = max(first_statistic, second_statistic)
+            if joint_maximum >= observed_first - 1e-12:
                 exceed_first += multiplicity
-            if maximum >= observed_second - 1e-12:
-                exceed_second += multiplicity
+            if second_statistic >= observed_second - 1e-12:
+                exceed_second_stage += multiplicity
             total += multiplicity
+
+    # The first-A/C hypothesis has the larger observed statistic. After it is
+    # removed, the second step contains only the second-A/C hypothesis. The
+    # cumulative maximum enforces the monotonicity of adjusted P values.
+    exceed_second = max(exceed_first, exceed_second_stage)
 
     summaries = []
     for group in GROUP_ORDER:
@@ -108,7 +114,7 @@ def exact_joint_maxt(rows: list[dict[str, str]]) -> list[dict[str, str | int | f
             statistic, exceedances = 0.0, total
         summaries.append(
             {
-                "analysis": "against_zero_maxT",
+                "analysis": "against_zero_stepdown_maxT",
                 "comparison": group,
                 "n": len(group_values),
                 "reference_mean_min": 0.0,
@@ -135,12 +141,16 @@ def exact_paired(rows: list[dict[str, str]]) -> dict[str, str | int | float]:
         if row["figure_group"] == SECOND_GROUP
     }
     ids = sorted(first.keys() & second.keys())
-    differences = [second[mouse_id] - first[mouse_id] for mouse_id in ids]
-    observed = abs(sum(differences) / len(differences))
+    differences = [
+        scaled(str(second[mouse_id] - first[mouse_id])) for mouse_id in ids
+    ]
+    sum_squares = sum(value * value for value in differences)
+    observed = abs(studentized_from_sum(sum(differences), sum_squares, len(differences)))
     extreme = 0
     total = 0
     for signs in product((-1, 1), repeat=len(differences)):
-        permuted = abs(sum(sign * value for sign, value in zip(signs, differences)) / len(differences))
+        signed_sum = sum(sign * value for sign, value in zip(signs, differences))
+        permuted = abs(studentized_from_sum(signed_sum, sum_squares, len(differences)))
         if permuted >= observed - 1e-12:
             extreme += 1
         total += 1
@@ -150,8 +160,8 @@ def exact_paired(rows: list[dict[str, str]]) -> dict[str, str | int | float]:
         "n": len(differences),
         "reference_mean_min": sum(first[mouse_id] for mouse_id in ids) / len(ids),
         "comparison_mean_min": sum(second[mouse_id] for mouse_id in ids) / len(ids),
-        "statistic_type": "mean paired difference",
-        "statistic": sum(differences) / len(differences),
+        "statistic_type": "studentized mean paired difference",
+        "statistic": studentized_from_sum(sum(differences), sum_squares, len(differences)),
         "extreme_assignments": extreme,
         "total_assignments": total,
         "P": extreme / total,

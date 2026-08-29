@@ -1,9 +1,9 @@
 analysis,comparison,n,reference_mean_min,comparison_mean_min,statistic_type,statistic,extreme_assignments,total_assignments,P
-against_zero_maxT,WT + A/C,12,0,0,studentized mean,0,536870912,536870912,1
-against_zero_maxT,SynC@FPC + A/C,29,0,18.763655172413788,studentized mean,8.23206607867053,2,536870912,0.000000003725290298461914
-against_zero_maxT,SynC@FPC - A/C,29,0,0,studentized mean,0,536870912,536870912,1
-against_zero_maxT,dGAP@FPC + A/C,11,0,0,studentized mean,0,536870912,536870912,1
-against_zero_maxT,FKBP-GAP + A/C,8,0,0,studentized mean,0,536870912,536870912,1
-against_zero_maxT,SynC@M1 + A/C,14,0,0,studentized mean,0,536870912,536870912,1
-against_zero_maxT,SynC@FPC A/C 2nd,7,0,20.98542857142857,studentized mean,4.212500687747144,8562734,536870912,0.01594933494925499
-paired_first_vs_second,First A/C vs second A/C,7,12.828857142857144,20.98542857142857,mean paired difference,8.156571428571429,30,128,0.234375
+against_zero_stepdown_maxT,WT + A/C,12,0,0,studentized mean,0,536870912,536870912,1
+against_zero_stepdown_maxT,SynC@FPC + A/C,29,0,18.763655172413788,studentized mean,8.23206607867053,2,536870912,0.000000003725290298461914
+against_zero_stepdown_maxT,SynC@FPC - A/C,29,0,0,studentized mean,0,536870912,536870912,1
+against_zero_stepdown_maxT,dGAP@FPC + A/C,11,0,0,studentized mean,0,536870912,536870912,1
+against_zero_stepdown_maxT,FKBP-GAP + A/C,8,0,0,studentized mean,0,536870912,536870912,1
+against_zero_stepdown_maxT,SynC@M1 + A/C,14,0,0,studentized mean,0,536870912,536870912,1
+against_zero_stepdown_maxT,SynC@FPC A/C 2nd,7,0,20.98542857142857,studentized mean,4.212500687747144,8388608,536870912,0.015625
+paired_first_vs_second,First A/C vs second A/C,7,12.828857142857144,20.98542857142857,studentized mean paired difference,1.3685342714308417,30,128,0.234375

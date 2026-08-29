@@ -6,7 +6,7 @@ reproducible Python scripts supporting the SynC manuscript.
 ## Published analyses
 
 - **Figure 4e:** exact mouse-level sign-flip tests, including dependence-aware
-  single-step maxT adjustment across the plotted groups and the paired
+  Romano-Wolf step-down maxT adjustment across the plotted groups and the paired
   first-versus-second A/C comparison.
 - **Figure 4g:** animal-level exact group-label permutation tests with
   two-sided single-step maxT adjustment; occupancy and feeding use studentized

@@ -6,7 +6,7 @@ State-C during the first hour after A/C.
 ## Primary family
 
 All seven plotted groups are tested against zero using studentized sign-flip
-statistics with a single-step maxT adjustment. The permutation unit is the
+statistics with a Romano-Wolf step-down maxT adjustment. The permutation unit is the
 mouse. Seven mice were measured after both their first and second A/C
 administrations; each paired mouse therefore receives the same sign in both
 conditions. The other 22 mice in the first-A/C SynC@FPC group receive
@@ -20,7 +20,8 @@ seed is used.
 ## Secondary paired comparison
 
 The ID-matched second-minus-first differences from seven mice are tested with
-a two-sided exact paired sign-flip permutation. All 2^7 = 128 assignments are
+a two-sided exact paired sign-flip permutation using a studentized mean paired
+difference. All 2^7 = 128 assignments are
 enumerated. Thirty assignments are at least as extreme as observed, giving
 P = 30/128 = 0.234375.
 
