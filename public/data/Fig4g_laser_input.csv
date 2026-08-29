@@ -1,0 +1,20 @@
+animal,group,unit,0-10 min,10-30 min,50-70 min,70-90 min
+WT01,WT,score,1,1,,
+WT02,WT,score,1,1,,1
+WT03,WT,score,1,1,1,
+WT04,WT,score,0,0,,
+WT05,WT,score,1,1,1,1
+WT06,WT,score,0.5,0,1,1
+WT07,WT,score,0.5,0,0,0
+WT08,WT,score,1,1,1,1
+SynC01,SynC,score,0,0,0,
+SynC02,SynC,score,1,0,1,
+SynC03,SynC,score,0,0,0.5,1
+SynC04,SynC,score,0,0,1,1
+SynC05,SynC,score,0.5,0,0.5,1
+SynC06,SynC,score,0.5,0,0.5,1
+SynC07,SynC,score,0,0,0.5,1
+SynC08,SynC,score,0.5,0,1,1
+SynC09,SynC,score,0,0,0,1
+SynC10,SynC,score,0,0,1,1
+SynC11,SynC,score,0,0,0.5,

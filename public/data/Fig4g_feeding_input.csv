@@ -1,0 +1,16 @@
+animal,group,unit,0-30 min,60-90 min
+WT01,WT,seconds,22,10
+WT02,WT,seconds,32,40
+WT03,WT,seconds,37,30
+WT04,WT,seconds,70,17
+WT05,WT,seconds,17,30
+WT06,WT,seconds,18,33
+WT07,WT,seconds,60,41
+WT08,WT,seconds,20,10
+SynC01,SynC,seconds,248,22
+SynC02,SynC,seconds,25,18
+SynC03,SynC,seconds,146,30
+SynC04,SynC,seconds,241,25
+SynC05,SynC,seconds,262,9
+SynC06,SynC,seconds,104,66
+SynC07,SynC,seconds,26,26
