@@ -9,20 +9,15 @@ export const metadata: Metadata = {
 const codeItems = [
   {
     title: "EEG analysis",
+    figure: "Figure 4c",
     description:
       "Blackrock .ns2/.ns3 preprocessing and spectral analysis used for Fig. 4c, with code, a 2,000-Hz synthetic processed-signal demo, and usage notes.",
     status: "View Fig. 4c resources →",
     href: "/python-code#fig4c-eeg",
   },
   {
-    title: "Resampling statistics",
-    description:
-      "Mouse- and animal-level exact permutation inputs, code, and Romano–Wolf step-down maxT results for Fig. 4e and Fig. 4g, with dependence and studentization choices recorded explicitly.",
-    status: "View Fig. 4e and 4g resources →",
-    href: "/statistical-tests#fig4e-signflip",
-  },
-  {
     title: "Visual-cortex analysis",
+    figure: "Extended Data Figure 4h–k",
     description:
       "MATLAB plotting and statistical analysis for Extended Data Fig. 4h–k, paired with the frozen source-data workbook used for the resubmission.",
     status: "View MATLAB code and data →",
@@ -30,6 +25,7 @@ const codeItems = [
   },
   {
     title: "Imaging analysis",
+    figure: "Figure 6g,h · Extended Data Figure 10",
     description:
       "Methods, frozen spine-level source tables, and permutation code for Fig. 6g,h and the Extended Data Fig. 10 mixture model.",
     status: "View Fig. 6 resources →",
@@ -37,12 +33,22 @@ const codeItems = [
   },
   {
     title: "Behavioural analysis",
+    figure: "Extended Data Figure 8",
     description:
       "Python workflows for food-approach and laser-response analyses using DeepLabCut-derived tracking data.",
     status: "View code →",
     href: "/behavioural-analysis",
   },
 ];
+
+const resamplingItem = {
+  title: "Resampling statistics",
+  figure: "Figures 4e and 4g",
+  description:
+    "Mouse- and animal-level exact permutation inputs, code, and Romano–Wolf step-down maxT results, with dependence and studentization choices recorded explicitly.",
+  status: "View Fig. 4e and 4g resources →",
+  href: "/statistical-tests#fig4e-signflip",
+};
 
 export default function Home() {
   return (
@@ -73,7 +79,10 @@ export default function Home() {
           Materials will be updated as the study proceeds toward publication.
         </p>
         <p className="authors">
-          Siqi Zhou, Takeshi Sawada, Hitoshi Okazaki <span>et al.</span>
+          Siqi Zhou, Takeshi Sawada, Hitoshi Okazaki, Tomoki Arima, Shunki
+          Takaramoto, Sadam Khan Panezai, Masanari Ohtsuka, Shin-Ichiro Terada,
+          Masashi Kondo, Takaaki Hashimoto, Kenichi Ohki, Masanori Matsuzaki,
+          Sho Yagishita &amp; Haruo Kasai
         </p>
       </section>
 
@@ -94,6 +103,7 @@ export default function Home() {
               <>
                 <div>
                   <h3>{item.title}</h3>
+                  <p className="itemFigure">{item.figure}</p>
                   <p>{item.description}</p>
                 </div>
                 <span className="status">{item.status}</span>
@@ -119,6 +129,9 @@ export default function Home() {
           <div className="statisticalItem">
             <div>
               <h3>Statistical analysis</h3>
+              <p className="itemFigure">
+                Figures 4e, 4g, 5, 6g,h · Extended Data Figure 10
+              </p>
               <p>
                 Descriptions of the statistical tests and the corresponding
                 Python scripts used in the manuscript.
@@ -129,6 +142,14 @@ export default function Home() {
               <a href="/python-code">Python scripts →</a>
             </div>
           </div>
+          <a href={resamplingItem.href}>
+            <div>
+              <h3>{resamplingItem.title}</h3>
+              <p className="itemFigure">{resamplingItem.figure}</p>
+              <p>{resamplingItem.description}</p>
+            </div>
+            <span className="status">{resamplingItem.status}</span>
+          </a>
         </div>
       </section>
 

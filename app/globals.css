@@ -128,10 +128,6 @@ h1 {
   font-size: 0.95rem;
 }
 
-.authors span {
-  font-style: italic;
-}
-
 .codeSection,
 .statistics,
 .citation {
@@ -195,6 +191,16 @@ h2 {
   margin: 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.codeList .itemFigure {
+  margin: 0 0 7px;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 620;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .codeActions {

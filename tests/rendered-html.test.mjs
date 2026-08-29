@@ -97,6 +97,37 @@ test("server-renders the analysis resource routes", async () => {
   }
 });
 
+test("homepage lists all authors, figure subtitles, and resampling last", async () => {
+  const response = await render("/");
+  const html = await response.text();
+
+  for (const author of [
+    "Siqi Zhou",
+    "Takeshi Sawada",
+    "Hitoshi Okazaki",
+    "Tomoki Arima",
+    "Shunki Takaramoto",
+    "Sadam Khan Panezai",
+    "Masanari Ohtsuka",
+    "Shin-Ichiro Terada",
+    "Masashi Kondo",
+    "Takaaki Hashimoto",
+    "Kenichi Ohki",
+    "Masanori Matsuzaki",
+    "Sho Yagishita",
+    "Haruo Kasai",
+  ]) {
+    assert.match(html, new RegExp(author));
+  }
+
+  assert.match(html, /Figure 4c/);
+  assert.match(html, /Extended Data Figure 4h–k/);
+  assert.match(html, /Extended Data Figure 8/);
+  assert.ok(
+    html.lastIndexOf("Resampling statistics") > html.lastIndexOf("Statistical analysis"),
+  );
+});
+
 test("publishes the Extended Data Figure 4 MATLAB package", async () => {
   const paths = [
     "public/code/ExtendedDataFig4_plot_code.m",
