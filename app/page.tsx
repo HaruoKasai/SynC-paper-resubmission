@@ -17,14 +17,14 @@ const codeItems = [
   {
     title: "Resampling statistics",
     description:
-      "Mouse- and animal-level exact permutation inputs, code, and single-step maxT results for Fig. 4e and Fig. 4g, with dependence and studentization choices recorded explicitly.",
+      "Mouse- and animal-level exact permutation inputs, code, and Romano–Wolf step-down maxT results for Fig. 4e and Fig. 4g, with dependence and studentization choices recorded explicitly.",
     status: "View Fig. 4e and 4g resources →",
     href: "/statistical-tests#fig4e-signflip",
   },
   {
     title: "Imaging analysis",
     description:
-      "Methods, frozen source tables, and Python code for the in vivo spine analyses in Fig. 6 and Extended Data Fig. 10.",
+      "Methods, frozen spine-level source tables, and permutation code for Fig. 6g,h and the Extended Data Fig. 10 mixture model.",
     status: "View Fig. 6 resources →",
     href: "/statistical-tests#fig6-spine-analysis",
   },

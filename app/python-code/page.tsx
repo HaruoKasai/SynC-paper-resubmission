@@ -39,7 +39,7 @@ const scripts = [
     detailHref: "/statistical-tests#fig4e-signflip",
     detailLabel: "Read the method description →",
     label: "Figure 4e",
-    name: "Exact sign-flip tests with single-step maxT",
+    name: "Exact sign-flip tests with step-down maxT",
     description:
       "Reproduces the mouse-level tests against zero while preserving the dependence of seven repeat measurements, plus the exact paired first-versus-second A/C comparison.",
     files: [
@@ -70,7 +70,7 @@ const scripts = [
     detailHref: "/statistical-tests#fig4g-permutation",
     detailLabel: "Read the method description →",
     label: "Figure 4g",
-    name: "Exact permutation tests with single-step maxT",
+    name: "Exact permutation tests with step-down maxT",
     description:
       "Reproduces the animal-level group comparisons for occupancy, laser response, and feeding. Complete group-label permutation spaces are enumerated while retaining each animal's time windows and missing-value pattern.",
     files: [
@@ -133,23 +133,28 @@ const scripts = [
     ],
   },
   {
-    id: "fig6-bootstrap",
+    id: "fig6-permutation",
     detailHref: "/statistical-tests#fig6-spine-analysis",
     detailLabel: "Read the method description →",
-    label: "Figure 6g",
-    name: "FOV-level parametric bootstrap",
+    label: "Figure 6g,h",
+    name: "Spine-level studentized permutation tests",
     description:
-      "Recomputes the adopted 10,000-replicate, two-sided comparisons of FOV mean ΔV and fixed condition-specific-posterior FOV means, including the mouse random intercept and the documented primary/secondary policy.",
+      "Reproduces the adopted 100,000-permutation tests of the continuous ΔV endpoint and the condition-specific mixture fraction π, including π re-estimation in every label permutation and the prespecified fixed sequence.",
     files: [
       {
-        name: "Fig6_FOV_parametric_bootstrap.py",
-        href: "/code/Fig6_FOV_parametric_bootstrap.py",
+        name: "Fig6_spine_permutation.py",
+        href: "/code/Fig6_spine_permutation.py",
         action: "Download Python",
       },
       {
-        name: "Fig6_ExFig10_FOV_input.csv",
-        href: "/data/Fig6_ExFig10_FOV_input.csv",
-        action: "Download FOV input",
+        name: "Fig6_ExFig10_spine_input.csv",
+        href: "/data/Fig6_ExFig10_spine_input.csv",
+        action: "Download spine-level input",
+      },
+      {
+        name: "Fig6_ExFig10_mixture_parameters.csv",
+        href: "/data/Fig6_ExFig10_mixture_parameters.csv",
+        action: "Download mixture parameters",
       },
       {
         name: "Fig6_ExFig10_reported_tests.csv",
@@ -170,7 +175,7 @@ const scripts = [
     label: "Extended Data Figure 10",
     name: "Normal-Exponential mixture audit",
     description:
-      "Recalculates the Normal and positive-response densities, verifies each spine's posterior permissive probability, and reproduces condition-specific π values from the frozen 40-80-s endpoints.",
+      "Recalculates the Normal and positive-response densities, verifies each spine's posterior permissive probability, and reproduces condition-specific π values from the frozen 40-80-s endpoints. The Fig. 6h hypothesis tests are provided in the Fig. 6g,h permutation script above.",
     files: [
       {
         name: "ExFig10_mixture_audit.py",

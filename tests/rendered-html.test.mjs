@@ -80,7 +80,7 @@ function parseSimpleCsv(text) {
 test("server-renders the analysis resource routes", async () => {
   const cases = [
     ["/", /Rapid associative spine enlargement/],
-    ["/statistical-tests", /Two-sided FOV-level parametric bootstrap/],
+    ["/statistical-tests", /Two-sided spine-level studentized permutation/],
     ["/python-code", /EEG\/EMG preprocessing and spectral analysis/],
   ];
 
@@ -123,7 +123,7 @@ test("publishes the Fig. 4c EEG analysis and synthetic workflow demo", async () 
 
 test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () => {
   const paths = [
-    "public/code/Fig6_FOV_parametric_bootstrap.py",
+    "public/code/Fig6_spine_permutation.py",
     "public/code/ExFig10_mixture_audit.py",
     "public/data/Fig6_ExFig10_FOV_input.csv",
     "public/data/Fig6_ExFig10_spine_input.csv",
@@ -155,45 +155,42 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   );
   assert.equal(
     testCsv.split(/\r?\n/, 1)[0],
-    "metric,contrast_id,alternative,effect,display_p,seed,repetitions,inference_role",
+    "panel,metric,contrast_id,contrast,alternative,effect_first_minus_second,studentized_statistic,p_value,seed,repetitions,inference_role",
   );
   assert.doesNotMatch(spineCsv, /[A-Z]:\\Users\\/i);
   assert.equal(spineCsv.trim().split(/\r?\n/).length - 1, 1088);
   assert.equal((spineCsv.match(/,stim,/g) ?? []).length, 565);
   assert.equal((spineCsv.match(/,neighbor,/g) ?? []).length, 523);
-  assert.match(testCsv, /sync_before_vs_0_60,two-sided,6\.286/);
-  assert.match(testCsv, /0\.048795120487951205/);
-  assert.match(testCsv, /0\.0058994100589941/);
-  assert.match(testCsv, /0\.762023797620238/);
-  assert.match(testCsv, /0\.48135186481351866/);
-  const reportedTests = new Map(
-    parseSimpleCsv(testCsv).map((row) => [row.contrast_id, row]),
+  assert.match(testCsv, /Fig\. 6g,mean_delta_v_40_80_percent,sync_before_vs_0_60/);
+  assert.match(testCsv, /0\.012869871301286986/);
+  assert.match(testCsv, /0\.007079929200707993/);
+  assert.match(testCsv, /0\.005089949100508995/);
+  assert.match(testCsv, /0\.04991950080499195/);
+  const reportedTests = parseSimpleCsv(testCsv);
+  assert.equal(reportedTests.length, 8);
+  assert.equal(
+    reportedTests.find((row) => row.panel === "Fig. 6h" && row.contrast_id === "sync_before_vs_0_60")?.metric,
+    "mixture_fraction_pi",
   );
-  assert.equal(reportedTests.get("sync_before_vs_0_60")?.display_p, "9.999000099990002e-05");
-  assert.equal(reportedTests.get("sync_0_60_vs_60_180")?.display_p, "9.999000099990002e-05");
-  assert.equal(reportedTests.get("dgap_before_vs_0_60")?.display_p, "0.5854414558544145");
-  assert.equal(reportedTests.get("dgap_0_60_vs_60_180")?.display_p, "0.9039096090390961");
-  assert.equal(reportedTests.get("sync_before_vs_0_60")?.metric, "fov_mean_posterior_score");
   assert.doesNotMatch(testCsv, /wt_vs_sync_before/);
   assert.doesNotMatch(testCsv, /sync_before_vs_60_180/);
-  assert.match(methodsPage, /mouse-level random intercept/);
-  assert.match(methodsPage, /For Figure 6g and the Figure 6h posterior/);
+  assert.match(methodsPage, /Individual stimulated spines are the/);
+  assert.match(methodsPage, /π was re-estimated separately in both groups/);
   assert.match(methodsPage, /SynC@FPC before A\/C vs 0–1 h after A\/C/);
   assert.match(methodsPage, /SynC-dGAP@FPC before A\/C vs 0–1 h after A\/C/);
   assert.doesNotMatch(methodsPage, /parametric-\s+bootstrap/);
-  assert.match(methodsPage, /condition-specific mixture fractions and averaged/);
-  assert.match(methodsPage, /held fixed during resampling/);
-  assert.match(methodsPage, /not direct tests of the displayed mixture fractions/);
+  assert.match(methodsPage, /same condition-specific mixture fraction/);
+  assert.match(methodsPage, /observed information/);
   assert.match(methodsPage, /Percentograms are used only for visualisation/);
   assert.doesNotMatch(methodsPage, /WT versus SynC -A\/C uses/);
   assert.doesNotMatch(methodsPage, /0\.3810|0\.1905/);
-  assert.match(codePage, /Fig6_FOV_parametric_bootstrap\.py/);
+  assert.match(codePage, /Fig6_spine_permutation\.py/);
   assert.match(parameters, /pi_WT/);
   assert.doesNotMatch(parameters, /common_pi_sensitivity/);
   assert.doesNotMatch(methodsPage, /common[- ]prior|π = 0\.242/i);
   assert.doesNotMatch(methodsReadme, /common[- ]prior|pi = 0\.241672/i);
   assert.match(methodsReadme, /WT rows and the frozen `pi_WT` parameter remain/);
-  assert.doesNotMatch(methodsReadme, /100,000|0\.0517/);
+  assert.match(methodsReadme, /100,000 Monte Carlo permutations/);
 
   const fovRows = parseSimpleCsv(fovCsv);
   const stimRows = parseSimpleCsv(spineCsv).filter((row) => row.role === "stim");
@@ -256,7 +253,7 @@ test("emits built styles and public downloads for the Sites asset binding", asyn
     ["/code/Fig4c_EEG_analysis.py", "text/x-python"],
     ["/data/Fig4c_EEG_demo.npz", "application/octet-stream"],
     ["/docs/README_Fig4c_EEG.md", "text/markdown"],
-    ["/code/Fig6_FOV_parametric_bootstrap.py", "text/x-python"],
+    ["/code/Fig6_spine_permutation.py", "text/x-python"],
     ["/data/Fig6_ExFig10_FOV_input.csv", "text/csv"],
     ["/docs/README_Fig6_ExFig10.md", "text/markdown"],
   ];
@@ -283,7 +280,7 @@ test("does not publish local drive or network paths", async () => {
   const paths = [
     "public/code/Fig4c_EEG_analysis.py",
     "public/docs/README_Fig4c_EEG.md",
-    "public/code/Fig6_FOV_parametric_bootstrap.py",
+    "public/code/Fig6_spine_permutation.py",
     "public/code/ExFig10_mixture_audit.py",
     "public/data/Fig6_ExFig10_FOV_input.csv",
     "public/data/Fig6_ExFig10_spine_input.csv",

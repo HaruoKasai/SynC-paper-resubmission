@@ -14,12 +14,12 @@ reproducible Python scripts supporting the SynC manuscript.
   mean difference.
 - **Figure 5:** paired exact sign-flip permutation analysis of population
   activity.
-- **Figure 6g:** 40-80-s mean spine-volume change analysed from equally
-  weighted FOV means with a two-sided heteroscedastic Normal parametric
-  bootstrap and mouse-level random intercept.
+- **Figure 6g:** 40-80-s mean spine-volume change analysed at the individual-
+  spine level with two-sided studentized permutation tests and a prespecified
+  fixed sequence for the two SynC contrasts.
 - **Figure 6h / Extended Data Figure 10:** Normal-Exponential mixture model,
-  condition-specific mixture fractions, fixed-posterior FOV-level comparison,
-  and distributional audit.
+  condition-specific mixture fractions, direct studentized permutation tests
+  of re-estimated mixture fractions, and distributional audit.
 
 The website provides method summaries under `/statistical-tests` and direct
 downloads under `/python-code`. Analysis-specific provenance and execution

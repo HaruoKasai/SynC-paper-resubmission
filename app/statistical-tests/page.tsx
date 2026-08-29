@@ -10,31 +10,31 @@ export const metadata: Metadata = {
 const deltaVResults = [
   [
     "SynC@FPC before A/C vs 0–1 h after A/C",
-    "0.0488",
-    "Primary, unadjusted",
+    "0.0129",
+    "First in fixed sequence",
   ],
   [
     "SynC@FPC 1–3 h after A/C vs 0–1 h after A/C",
-    "0.0059",
-    "Secondary, unadjusted",
+    "0.00708",
+    "Confirmatory after first rejection",
   ],
   [
     "SynC-dGAP@FPC before A/C vs 0–1 h after A/C",
-    "0.7620",
-    "Descriptive, unadjusted",
+    "0.849",
+    "Descriptive",
   ],
   [
     "SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C",
-    "0.4814",
-    "Descriptive, unadjusted",
+    "0.882",
+    "Descriptive",
   ],
 ];
 
 const permissiveResults = [
-  ["SynC@FPC before A/C vs 0–1 h after A/C", "1.0 × 10⁻⁴"],
-  ["SynC@FPC 1–3 h after A/C vs 0–1 h after A/C", "1.0 × 10⁻⁴"],
-  ["SynC-dGAP@FPC before A/C vs 0–1 h after A/C", "0.5854"],
-  ["SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C", "0.9039"],
+  ["SynC@FPC before A/C vs 0–1 h after A/C", "0.00509"],
+  ["SynC@FPC 1–3 h after A/C vs 0–1 h after A/C", "0.0499"],
+  ["SynC-dGAP@FPC before A/C vs 0–1 h after A/C", "0.802"],
+  ["SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C", "0.750"],
 ];
 
 export default function StatisticalTestsPage() {
@@ -289,9 +289,9 @@ export default function StatisticalTestsPage() {
           <p>
             The frozen source package contains 1,088 ROI-level endpoints. The
             primary continuous endpoint is the mean volume change from 40 to
-            80 s after stimulation. For Figure 6g and the Figure 6h posterior
-            comparison, FOVs, rather than individual spines, are equally weighted
-            in the group summaries and bootstrap model.
+            80 s after stimulation. Individual stimulated spines are the
+            analysis observations for Figure 6g,h. FOV membership is retained
+            for provenance, homogeneity checks, and display summaries.
           </p>
           <div className="methodGrid">
             <div>
@@ -337,14 +337,14 @@ export default function StatisticalTestsPage() {
           <h2>Why two complementary analyses were used</h2>
           <p>
             Figure 6g provides the primary, threshold-free analysis of response
-            magnitude using FOV-level mean ΔV from 40 to 80 s. Because the null
+            magnitude using spine-level mean ΔV from 40 to 80 s. Because the null
             and positive-response distributions overlap, classification using
             a single binary threshold would be sensitive to the choice of
             threshold. Figure 6h therefore complements this analysis by using a
             Normal-Exponential mixture model to estimate the condition-specific
-            permissive fraction and spine-level posterior permissive
-            probabilities, which were averaged within each FOV for
-            between-condition comparisons. Thus, Figure 6g tests the continuous
+            permissive fraction. Between-condition tests directly compare this
+            fitted fraction by re-estimating it after each group-label
+            permutation. Thus, Figure 6g tests the continuous
             response magnitude directly, whereas Figure 6h describes the
             model-dependent heterogeneity underlying that response.
           </p>
@@ -352,21 +352,19 @@ export default function StatisticalTestsPage() {
 
         <section>
           <p className="sectionLabel">Figure 6g · Continuous endpoint</p>
-          <h2>Two-sided FOV-level parametric bootstrap</h2>
+          <h2>Two-sided spine-level studentized permutation</h2>
           <p>
-            Mean ΔV from 40 to 80 s was first averaged within each FOV. Group
-            contrasts were assessed with a two-sided heteroscedastic Normal
-            parametric bootstrap of equally weighted FOV means with a
-            mouse-level random intercept (10,000 replicates). Heteroscedastic
-            indicates that residual variance was estimated separately for each
-            group.
+            Mean ΔV from 40 to 80 s was calculated for every stimulated spine.
+            Group contrasts used Welch-type studentized mean differences and
+            100,000 group-label permutations preserving group sizes. Monte
+            Carlo P values used the plus-one correction and fixed seeds.
           </p>
           <p>
             The prespecified SynC@FPC before A/C versus 0–1 h after A/C
-            contrast is the single primary comparison. The recovery SynC@FPC
-            contrast is secondary and reported without multiplicity
-            adjustment. SynC-dGAP@FPC comparisons are two-sided descriptive
-            controls.
+            contrast is tested first. The recovery SynC@FPC contrast is
+            confirmatory only after rejection of the first null hypothesis.
+            No additional multiplicity adjustment is applied within this fixed
+            sequence. SynC-dGAP@FPC comparisons are descriptive controls.
           </p>
           <div className="resultTable" role="table" aria-label="Figure 6g P values">
             <div className="resultRow resultHeader" role="row">
@@ -386,7 +384,7 @@ export default function StatisticalTestsPage() {
 
         <section>
           <p className="sectionLabel">Figure 6h · Permissive fraction</p>
-          <h2>Normal-Exponential mixture and fixed-posterior comparison</h2>
+          <h2>Normal-Exponential mixture-fraction permutation</h2>
           <p>
             A zero-centred Normal null distribution was estimated from all
             pooled neighbouring spines (σ = 9.374%). The positive latent
@@ -396,17 +394,15 @@ export default function StatisticalTestsPage() {
             estimated separately for each condition.
           </p>
           <p>
-            Spine-level posterior permissive probabilities were calculated
-            using the fitted condition-specific mixture fractions and averaged
-            within each FOV. Between-condition differences in FOV-mean
-            posterior scores were assessed by parametric bootstrap, with a
-            mouse-level random intercept and with the fitted mixture parameters
-            and posterior probabilities held fixed during resampling. Bars show
-            the condition-specific model-estimated mixture fractions; the
-            statistical comparisons use their corresponding FOV-mean posterior
-            scores and are not direct tests of the displayed mixture fractions.
+            The bars and tests use the same condition-specific mixture fraction
+            π. The shared Normal and positive-component parameters were held at
+            their frozen Extended Data Fig. 10 values. Group labels were
+            permuted 100,000 times; π was re-estimated separately in both groups
+            for every permutation, and its difference was studentized by the
+            observed information. The SynC contrasts followed the same fixed
+            sequence as Figure 6g; dGAP contrasts were descriptive.
           </p>
-          <h3>FOV-mean posterior-score comparisons</h3>
+          <h3>Direct mixture-fraction comparisons</h3>
           <div className="resultTable" role="table" aria-label="Figure 6h P values">
             <div className="resultRow resultRowTwo resultHeader" role="row">
               <span role="columnheader">Contrast</span>
@@ -430,8 +426,7 @@ export default function StatisticalTestsPage() {
             density calculated as count divided by sample size and bin width.
             This display makes the positive tail visible on a logarithmic axis.
             Percentograms are used only for visualisation. Mixture fitting and
-            posterior calculation use unbinned spine-level endpoints, whereas
-            between-condition inference uses FOV-averaged posterior scores.
+            between-condition inference use unbinned spine-level endpoints.
           </p>
         </section>
 
@@ -447,8 +442,8 @@ export default function StatisticalTestsPage() {
             and reported test result needed to audit the figures is retained.
           </p>
           <div className="articleLinks">
-            <a className="repoLink" href="/python-code#fig6-bootstrap">
-              Fig. 6 bootstrap code →
+            <a className="repoLink" href="/python-code#fig6-permutation">
+              Fig. 6g,h permutation code →
             </a>
             <a className="repoLink" href="/python-code#exfig10-mixture">
               Mixture audit code →

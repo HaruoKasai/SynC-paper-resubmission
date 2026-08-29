@@ -1,8 +1,8 @@
 # Figure 6 and Extended Data Figure 10 reproducibility record
 
 This package publishes the frozen 40-80-s spine-enlargement endpoint, FOV
-summaries, fitted mixture parameters, and the 10,000-replicate two-sided test
-results used for the manuscript-facing Fig. 6 and Extended Data Fig. 10.
+summaries, fitted mixture parameters, and the adopted 100,000-permutation
+two-sided tests used for Fig. 6g,h and Extended Data Fig. 10.
 
 ## Frozen source
 
@@ -19,7 +19,8 @@ SHA-256 hashes of the internal frozen inputs are:
 | `fov_summary.csv` | `FB81B66BB0C4ACB4ABFF23F51B0504456821C2F7B2B98C8F26133117803332DB` |
 | `spine_endpoint_40_80_and_posterior.csv` | `BC47A7E3231DA81491172E25C12652B970845424FBDB1402718B0CC9D832FC47` |
 | `mixture_parameters.csv` | `E431E8CB0D6B6ED84EF4AF0607AC3F2860BBB0D975A333ADECE2581A5827336E` |
-| 10,000-replicate two-sided result CSV | `D503AC1D219FC3AB9E0714B9AEDF73250C02895A80DC9D248186F233E1E5557D` |
+| 100,000-permutation two-sided result CSV | `3CEE417B8F3D19B66D41DBDE0BE798E048224AF1B9E4B450168819A626EB246F` |
+| Adopted Fig. 6g,h permutation script | `46556D024E2F9D12D0738256FAA8E195DE3D38354665A0B0789295E80C994364` |
 
 The public CSVs exclude local filesystem paths and redundant internal columns.
 Original mouse, FOV, and spine labels are replaced by stable opaque aliases.
@@ -58,44 +59,24 @@ testing use retained unbinned measurements.
 
 ## Figure 6g: continuous endpoint
 
-Each FOV contributes one equally weighted mean. SynC@FPC and SynC-dGAP@FPC
-contrasts use a two-sided heteroscedastic Normal parametric bootstrap of FOV
-means with a mouse random intercept. Group-specific residual SDs are estimated,
-so `heteroscedastic` does not merely refer to comparing multiple groups.
+The analysis observations are individual stimulated spines. FOV membership is
+retained for provenance, homogeneity checks, and display summaries, but FOVs
+are not averaged for inference. Each contrast uses a two-sided studentized
+permutation test with the Welch-type difference in mean 40-80-s Delta V.
+Group labels are reassigned while preserving the two group sizes.
 
-The adopted run uses 10,000 replicates and the following seeds:
+The adopted Monte Carlo run uses 100,000 permutations. SynC@FPC before A/C
+versus 0–1 h after A/C is tested first; the 1–3 h versus 0–1 h recovery
+contrast is confirmatory only after rejection of the first null hypothesis.
+No additional multiplicity adjustment is applied within this fixed sequence.
+SynC-dGAP@FPC contrasts are descriptive and unadjusted.
 
-- SynC@FPC Delta V: `2026072801`
-- SynC-dGAP@FPC Delta V: `2026073001`
-- SynC@FPC permissive fraction: `2026072901`
-- SynC-dGAP@FPC permissive fraction: `2026073101`
-
-The multiplicity policy is:
-
-1. SynC@FPC before A/C versus 0–1 h after A/C is the single prespecified
-   primary contrast and is reported without multiplicity adjustment.
-2. The SynC@FPC 1–3 h versus 0–1 h after A/C recovery contrast is secondary
-   and is reported without multiplicity adjustment.
-3. SynC-dGAP@FPC contrasts are two-sided descriptive comparisons without
-   adjustment.
-
-The displayed P values are:
-
-| Metric | Contrast | P |
-| --- | --- | ---: |
-| Delta V | SynC@FPC before A/C vs 0–1 h after A/C | 0.0488 |
-| Delta V | SynC@FPC 1–3 h after A/C vs 0–1 h after A/C | 0.0059 |
-| Delta V | SynC-dGAP@FPC before A/C vs 0–1 h after A/C | 0.7620 |
-| Delta V | SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C | 0.4814 |
-
-Run the public implementation from a directory containing the Python file and
-FOV CSV:
-
-```bash
-python Fig6_FOV_parametric_bootstrap.py Fig6_ExFig10_FOV_input.csv
-```
-
-Dependencies are Python 3.12+, NumPy, and pandas.
+| Contrast | P |
+| --- | ---: |
+| SynC@FPC before A/C vs 0–1 h after A/C | 0.0129 |
+| SynC@FPC 1–3 h after A/C vs 0–1 h after A/C | 0.00708 |
+| SynC-dGAP@FPC before A/C vs 0–1 h after A/C | 0.849 |
+| SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C | 0.882 |
 
 ## Figure 6h and Extended Data Figure 10: mixture model
 
@@ -117,23 +98,35 @@ Condition-specific fitted positive-component fractions are:
 | SynC-dGAP@FPC 0–1 h after A/C | 26.58% |
 | SynC-dGAP@FPC 1–3 h after A/C | 23.01% |
 
-Spine-level posterior permissive probabilities are calculated using the fitted
-condition-specific mixture fractions and averaged within each FOV. These FOV
-means are compared by the same heteroscedastic Normal parametric-bootstrap
-structure as the continuous endpoint, including the mouse random intercept.
-Bootstrap samples are generated at the FOV level. Individual spine responses
-are not regenerated from the mixture distribution, and the fitted mixture
-parameters and posterior probabilities are held fixed during resampling. The
-Fig. 6h bars show the condition-specific model-estimated fractions listed
-above; statistical comparisons use their corresponding FOV-mean posterior
-scores and are not direct tests of the displayed mixture fractions.
+Figure 6h displays the condition-specific mixture fraction pi estimated from
+the Extended Data Fig. 10 model. Its test is therefore not the Fig. 6g test
+applied to posterior scores. The shared null sigma and positive-component theta
+are held at their frozen Extended Data Fig. 10 values. For every group-label
+permutation, pi is re-estimated separately in both groups by maximum likelihood.
+The pi difference is studentized using the observed information of the two
+fitted fractions. Thus the hypothesis test directly targets the quantity shown
+by the Fig. 6h bars.
+
+The same SynC fixed sequence and descriptive dGAP policy used for Fig. 6g are
+applied. The adopted run uses 100,000 Monte Carlo permutations.
 
 | Contrast | P |
 | --- | ---: |
-| SynC@FPC before A/C vs 0–1 h after A/C | 1.0 × 10^-4 |
-| SynC@FPC 1–3 h after A/C vs 0–1 h after A/C | 1.0 × 10^-4 |
-| SynC-dGAP@FPC before A/C vs 0–1 h after A/C | 0.5854 |
-| SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C | 0.9039 |
+| SynC@FPC before A/C vs 0–1 h after A/C | 0.00509 |
+| SynC@FPC 1–3 h after A/C vs 0–1 h after A/C | 0.0499 |
+| SynC-dGAP@FPC before A/C vs 0–1 h after A/C | 0.802 |
+| SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C | 0.750 |
+
+Run the adopted analysis with:
+
+```bash
+python Fig6_spine_permutation.py Fig6_ExFig10_spine_input.csv \
+  --parameters Fig6_ExFig10_mixture_parameters.csv \
+  --output Fig6_ExFig10_reported_tests.csv
+```
+
+The script requires Python 3.12+ and NumPy. Seeds for every contrast and panel
+are recorded in the result CSV.
 
 The selected Extended Data Fig. 10 uses one-percentile percentograms. Bin
 widths vary so that each bin contains approximately equal numbers of points;
@@ -154,13 +147,15 @@ condition-specific mixture fractions.
 
 ## Public files
 
-- `Fig6_ExFig10_FOV_input.csv`: one stimulated-spine summary row per FOV,
-  including the mean fixed condition-specific posterior score.
+- `Fig6_ExFig10_FOV_input.csv`: descriptive FOV summaries used for provenance,
+  homogeneity checks, and display; not the inferential input.
 - `Fig6_ExFig10_spine_input.csv`: path-sanitised frozen ROI endpoint table.
 - `Fig6_ExFig10_cohort_counts.csv`: role/group cohort counts.
 - `Fig6_ExFig10_mixture_parameters.csv`: frozen joint model parameters.
-- `Fig6_ExFig10_reported_tests.csv`: adopted 10,000-replicate Fig. 6g/h
+- `Fig6_ExFig10_reported_tests.csv`: adopted 100,000-permutation Fig. 6g/h
   SynC and dGAP results.
+- `Fig6_spine_permutation.py`: adopted Fig. 6g continuous-endpoint and Fig. 6h
+  mixture-fraction tests.
 
 WT rows and the frozen `pi_WT` parameter remain in the spine-level source and
 mixture-model files because WT is displayed in Extended Data Fig. 10. No WT
