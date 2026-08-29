@@ -19,8 +19,8 @@ SHA-256 hashes of the internal frozen inputs are:
 | `fov_summary.csv` | `FB81B66BB0C4ACB4ABFF23F51B0504456821C2F7B2B98C8F26133117803332DB` |
 | `spine_endpoint_40_80_and_posterior.csv` | `BC47A7E3231DA81491172E25C12652B970845424FBDB1402718B0CC9D832FC47` |
 | `mixture_parameters.csv` | `E431E8CB0D6B6ED84EF4AF0607AC3F2860BBB0D975A333ADECE2581A5827336E` |
-| 100,000-permutation two-sided result CSV | `3CEE417B8F3D19B66D41DBDE0BE798E048224AF1B9E4B450168819A626EB246F` |
-| Adopted Fig. 6g,h permutation script | `63426A53429FF9A57B7A0D0B595ECCAD1F1E1CA56492EE1F050D670FDAE5CD80` |
+| 100,000-permutation two-sided result CSV | `E956C23AA73C2217109425DA8DE6AFE06F78694A2E097B3FC50BFDE1CA810599` |
+| Adopted Fig. 6g,h permutation script | `2DA1920334FF35CD2936AD53F3C13A31D44916B25D2B100B979ABE2F9AB42D87` |
 
 The public CSVs exclude local filesystem paths and redundant internal columns.
 Original mouse, FOV, and spine labels are replaced by stable opaque aliases.
@@ -29,6 +29,14 @@ private correspondence table is not distributed. Endpoint values,
 condition-specific posterior probabilities, and group mixture fractions are
 unchanged. The Fig. 6h FOV table contains the within-FOV means of those frozen
 condition-specific posterior probabilities.
+
+Rows in the public source tables follow the display order: WT, the three SynC
+conditions in chronological order, and the three SynC-dGAP conditions in
+chronological order. Within each condition, stable mouse, FOV, and spine aliases
+determine row order. The `permutation_order` column preserves the frozen input
+sequence that generated the adopted seeded Monte Carlo results; the analysis
+script restores that sequence before permutation, so presentation sorting does
+not alter the reported P values.
 
 ## Cohort
 
@@ -149,7 +157,9 @@ condition-specific mixture fractions.
 
 - `Fig6_ExFig10_FOV_input.csv`: descriptive FOV summaries used for provenance,
   homogeneity checks, and display; not the inferential input.
-- `Fig6_ExFig10_spine_input.csv`: path-sanitised frozen ROI endpoint table.
+- `Fig6_ExFig10_spine_input.csv`: path-sanitised frozen ROI endpoint table in
+  figure order, with `permutation_order` retaining the frozen seeded-analysis
+  sequence.
 - `Fig6_ExFig10_cohort_counts.csv`: role/group cohort counts.
 - `Fig6_ExFig10_mixture_parameters.csv`: frozen joint model parameters.
 - `Fig6_ExFig10_reported_tests.csv`: adopted 100,000-permutation Fig. 6g/h

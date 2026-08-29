@@ -1,9 +1,9 @@
 panel,metric,contrast_id,contrast,alternative,effect_first_minus_second,studentized_statistic,p_value,seed,repetitions,inference_role
 Fig. 6g,mean_delta_v_40_80_percent,sync_before_vs_0_60,SynC before vs SynC 0-60,two-sided,7.354710570418533,2.560297527772792,0.012869871301286986,2026072801,100000,primary
-Fig. 6h,mixture_fraction_pi,sync_before_vs_0_60,SynC before vs SynC 0-60,two-sided,0.22422454246840431,3.044451246139307,0.005089949100508995,2026072901,100000,primary
 Fig. 6g,mean_delta_v_40_80_percent,sync_60_180_vs_0_60,SynC 60-180 vs SynC 0-60,two-sided,6.536155767255737,2.659572679322856,0.007079929200707993,2026072802,100000,secondary
-Fig. 6h,mixture_fraction_pi,sync_60_180_vs_0_60,SynC 60-180 vs SynC 0-60,two-sided,0.14754875516881574,2.026198070684683,0.04991950080499195,2026072902,100000,secondary
 Fig. 6g,mean_delta_v_40_80_percent,dgap_before_vs_0_60,dGAP before vs dGAP 0-60,two-sided,1.2502854047275385,0.20171776082682352,0.8490815091849081,2026073001,100000,descriptive
-Fig. 6h,mixture_fraction_pi,dgap_before_vs_0_60,dGAP before vs dGAP 0-60,two-sided,-0.028898475714655925,-0.2529811998975437,0.8019419805801942,2026073101,100000,descriptive
 Fig. 6g,mean_delta_v_40_80_percent,dgap_0_60_vs_60_180,dGAP 0-60 vs dGAP 60-180,two-sided,-0.8903812245563447,-0.14993201765766648,0.8819311806881931,2026073002,100000,descriptive
+Fig. 6h,mixture_fraction_pi,sync_before_vs_0_60,SynC before vs SynC 0-60,two-sided,0.22422454246840431,3.044451246139307,0.005089949100508995,2026072901,100000,primary
+Fig. 6h,mixture_fraction_pi,sync_60_180_vs_0_60,SynC 60-180 vs SynC 0-60,two-sided,0.14754875516881574,2.026198070684683,0.04991950080499195,2026072902,100000,secondary
+Fig. 6h,mixture_fraction_pi,dgap_before_vs_0_60,dGAP before vs dGAP 0-60,two-sided,-0.028898475714655925,-0.2529811998975437,0.8019419805801942,2026073101,100000,descriptive
 Fig. 6h,mixture_fraction_pi,dgap_0_60_vs_60_180,dGAP 0-60 vs dGAP 60-180,two-sided,0.03564600374894322,0.32439624052752225,0.7503124968750312,2026073102,100000,descriptive

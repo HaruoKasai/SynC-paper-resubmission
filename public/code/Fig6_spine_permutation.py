@@ -40,6 +40,8 @@ def _load_spines(path: Path) -> dict[str, list[dict[str, str]]]:
             if row["role"] != "stim":
                 continue
             grouped.setdefault(row["group"], []).append(row)
+    for rows in grouped.values():
+        rows.sort(key=lambda row: int(row["permutation_order"]))
     return grouped
 
 
@@ -270,6 +272,21 @@ def main() -> None:
                 "inference_role": role,
             }
         )
+
+    # Keep the machine-readable output in the same order as the figures and
+    # Source Data tables: all Fig. 6g contrasts first, followed by Fig. 6h;
+    # within each panel, effect, recovery, and the two dGAP descriptions.
+    contrast_order = {
+        contrast_id: index
+        for index, (contrast_id, *_rest) in enumerate(CONTRASTS)
+    }
+    panel_order = {"Fig. 6g": 0, "Fig. 6h": 1}
+    output_rows.sort(
+        key=lambda row: (
+            panel_order[str(row["panel"])],
+            contrast_order[str(row["contrast_id"])],
+        )
+    )
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", newline="", encoding="utf-8") as handle:

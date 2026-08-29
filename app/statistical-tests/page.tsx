@@ -443,6 +443,14 @@ export default function StatisticalTestsPage() {
             endpoint, FOV assignment, posterior probability, model parameter,
             and reported test result needed to audit the figures is retained.
           </p>
+          <p>
+            Source rows follow the figure order: WT, chronological SynC
+            conditions, then chronological SynC-dGAP conditions. The spine CSV
+            also retains a frozen permutation-order field so that this display
+            sorting does not change the adopted seeded Monte Carlo results.
+            Reported-test rows list all Figure 6g contrasts first and all Figure
+            6h contrasts second, each in effect, recovery, and dGAP-control order.
+          </p>
           <div className="articleLinks">
             <a className="repoLink" href="/python-code#fig6-permutation">
               Fig. 6g,h permutation code →

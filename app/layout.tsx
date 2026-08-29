@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sync-paper-analysis.hkasaimd.chatgpt.site"),
+  metadataBase: new URL("https://sync-paper-resubmission.hkasaimd.chatgpt.site"),
   title: {
     default: "SynC | Analysis resources",
     template: "%s",

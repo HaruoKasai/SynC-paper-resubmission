@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Behavioural analysis code | SynC",
@@ -41,14 +42,14 @@ export default function BehaviouralAnalysisPage() {
   return (
     <main>
       <nav className="nav" aria-label="Page navigation">
-        <a className="brand" href="/">
+        <Link className="brand" href="/">
           SynC
-        </a>
+        </Link>
         <div className="navLinks">
-          <a href="/">Home</a>
-          <a href="/python-code">Statistical code</a>
+          <Link href="/">Home</Link>
+          <Link href="/python-code">Statistical code</Link>
           <a
-            href="https://github.com/HaruoKasai/SynC-paper-site"
+            href="https://github.com/HaruoKasai/SynC-paper-resubmission"
             target="_blank"
             rel="noreferrer"
           >
@@ -87,7 +88,7 @@ export default function BehaviouralAnalysisPage() {
                   Download Python
                 </a>
                 <a
-                  href="https://github.com/HaruoKasai/SynC-paper-site/tree/main/public/data/edf8_demo"
+                  href="https://github.com/HaruoKasai/SynC-paper-resubmission/tree/main/public/data/edf8_demo"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -111,7 +112,7 @@ export default function BehaviouralAnalysisPage() {
         </div>
         <a
           className="repoLink"
-          href="https://github.com/HaruoKasai/SynC-paper-site/tree/main/public/data/edf8_demo"
+          href="https://github.com/HaruoKasai/SynC-paper-resubmission/tree/main/public/data/edf8_demo"
           target="_blank"
           rel="noreferrer"
         >
@@ -121,7 +122,7 @@ export default function BehaviouralAnalysisPage() {
 
       <footer>
         <span>SynC behavioural analysis code</span>
-        <a href="/">Back to analysis resources</a>
+        <Link href="/">Back to analysis resources</Link>
       </footer>
     </main>
   );

@@ -151,7 +151,7 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   );
   assert.equal(
     spineCsv.split(/\r?\n/, 1)[0],
-    "group,role,mouse_id,fov_id,spine_id,corrected_delta_v_40_80_percent,posterior_permissive",
+    "group,role,mouse_id,fov_id,spine_id,corrected_delta_v_40_80_percent,posterior_permissive,permutation_order",
   );
   assert.equal(
     testCsv.split(/\r?\n/, 1)[0],
@@ -168,6 +168,19 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   assert.match(testCsv, /0\.04991950080499195/);
   const reportedTests = parseSimpleCsv(testCsv);
   assert.equal(reportedTests.length, 8);
+  assert.deepEqual(
+    reportedTests.map((row) => `${row.panel}:${row.contrast_id}`),
+    [
+      "Fig. 6g:sync_before_vs_0_60",
+      "Fig. 6g:sync_60_180_vs_0_60",
+      "Fig. 6g:dgap_before_vs_0_60",
+      "Fig. 6g:dgap_0_60_vs_60_180",
+      "Fig. 6h:sync_before_vs_0_60",
+      "Fig. 6h:sync_60_180_vs_0_60",
+      "Fig. 6h:dgap_before_vs_0_60",
+      "Fig. 6h:dgap_0_60_vs_60_180",
+    ],
+  );
   assert.equal(
     reportedTests.find((row) => row.panel === "Fig. 6h" && row.contrast_id === "sync_before_vs_0_60")?.metric,
     "mixture_fraction_pi",
