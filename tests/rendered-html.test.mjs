@@ -82,8 +82,9 @@ function parseSimpleCsv(text) {
 test("server-renders the analysis resource routes", async () => {
   const cases = [
     ["/", /Rapid associative spine enlargement/],
+    ["/eeg-analysis", /EEG\/EMG preprocessing and spectral analysis/],
     ["/statistical-tests", /Two-sided spine-level studentized permutation/],
-    ["/python-code", /EEG\/EMG preprocessing and spectral analysis/],
+    ["/python-code", /Python resampling code and frozen source tables/],
     ["/matlab-code", /MATLAB code and source data for Extended Data Figure 4/],
   ];
 
@@ -163,19 +164,22 @@ test("publishes the Fig. 4c EEG analysis and synthetic workflow demo", async () 
   ];
   await Promise.all(paths.map((path) => access(new URL(path, root))));
 
-  const [homePage, codePage, analysisCode, readme] = await Promise.all([
+  const [homePage, eegPage, resamplingPage, analysisCode, readme] = await Promise.all([
     readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/eeg-analysis/page.tsx", root), "utf8"),
     readFile(new URL("app/python-code/page.tsx", root), "utf8"),
     readFile(new URL("public/code/Fig4c_EEG_analysis.py", root), "utf8"),
     readFile(new URL("public/docs/README_Fig4c_EEG.md", root), "utf8"),
   ]);
 
-  assert.match(homePage, /\/python-code#fig4c-eeg/);
+  assert.match(homePage, /href: "\/eeg-analysis"/);
   assert.doesNotMatch(homePage, /tkssawada\/SynC/);
-  assert.match(codePage, /Fig4c_EEG_analysis\.py/);
-  assert.match(codePage, /Fig4c_EEG_demo\.npz/);
-  assert.match(codePage, /2,000-Hz synthetic NPZ/);
-  assert.doesNotMatch(codePage, /tkssawada\/SynC/);
+  assert.match(eegPage, /Fig4c_EEG_analysis\.py/);
+  assert.match(eegPage, /Fig4c_EEG_demo\.npz/);
+  assert.match(eegPage, /2,000-Hz synthetic NPZ/);
+  assert.doesNotMatch(eegPage, /step-down maxT|Fig4e_exact_signflip/);
+  assert.doesNotMatch(resamplingPage, /Fig4c_EEG_analysis|fig4c-eeg/);
+  assert.doesNotMatch(eegPage, /tkssawada\/SynC/);
   assert.match(analysisCode, /BlackrockIO/);
   assert.match(analysisCode, /f\.endswith\(\("\.ns3", "\.ns2"\)\)/);
   assert.match(readme, /raw Blackrock `\.ns2`\/`\.ns3` recordings/);

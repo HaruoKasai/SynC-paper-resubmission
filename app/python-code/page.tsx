@@ -2,38 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Python analysis code | SynC",
+  title: "Python resampling code | SynC",
   description:
-    "Python scripts, public inputs, and clearly labelled demos supporting analyses in the SynC manuscript.",
+    "Python resampling scripts and frozen public inputs supporting statistical analyses in the SynC manuscript.",
 };
 
 const scripts = [
-  {
-    id: "fig4c-eeg",
-    label: "Figure 4c",
-    name: "EEG/EMG preprocessing and spectral analysis",
-    description:
-      "Processes Blackrock .ns2/.ns3 electrophysiology recordings and generates referenced EEG/EMG traces, STFT power spectra, event tables, and summary figures. The included 2,000-Hz synthetic NPZ starts at the processed-signal stage and tests STFT and figure generation; it is not manuscript source data.",
-    detailHref: "/docs/README_Fig4c_EEG.md",
-    detailLabel: "Read data and usage notes →",
-    files: [
-      {
-        name: "Fig4c_EEG_analysis.py",
-        href: "/code/Fig4c_EEG_analysis.py",
-        action: "Download Python",
-      },
-      {
-        name: "Fig4c_EEG_demo.npz",
-        href: "/data/Fig4c_EEG_demo.npz",
-        action: "Download synthetic demo",
-      },
-      {
-        name: "README_Fig4c_EEG.md",
-        href: "/docs/README_Fig4c_EEG.md",
-        action: "Download README",
-      },
-    ],
-  },
   {
     id: "fig4e-signflip",
     detailHref: "/statistical-tests#fig4e-signflip",
@@ -219,11 +193,11 @@ export default function PythonCodePage() {
       </nav>
 
       <header className="subpageHero">
-        <p className="eyebrow">Reproducible analysis</p>
-        <h1>Python code and frozen source tables</h1>
+        <p className="eyebrow">Resampling statistics</p>
+        <h1>Python resampling code and frozen source tables</h1>
         <p className="lead">
-          Downloadable analysis scripts are paired with exact public inputs or
-          clearly labelled workflow demos, plus their method and usage records.
+          Downloadable statistical scripts are paired with their exact public
+          inputs, reported results, and method records.
         </p>
       </header>
 

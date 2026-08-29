@@ -13,7 +13,7 @@ const codeItems = [
     description:
       "Blackrock .ns2/.ns3 preprocessing and spectral analysis used for Fig. 4c, with code, a 2,000-Hz synthetic processed-signal demo, and usage notes.",
     status: "View Fig. 4c resources →",
-    href: "/python-code#fig4c-eeg",
+    href: "/eeg-analysis",
   },
   {
     title: "Visual-cortex analysis",
@@ -55,7 +55,7 @@ export default function Home() {
         <div className="navLinks">
           <a href="#code">Code</a>
           <a href="/statistical-tests">Statistics</a>
-          <a href="/python-code">Python code</a>
+          <a href="/python-code">Resampling code</a>
           <a href="/matlab-code">MATLAB code</a>
         </div>
       </nav>

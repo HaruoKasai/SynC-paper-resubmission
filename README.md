@@ -5,6 +5,9 @@ reproducible Python scripts supporting the SynC manuscript.
 
 ## Published analyses
 
+- **Figure 4c:** dedicated EEG/EMG preprocessing and spectral-analysis page,
+  with the Blackrock workflow, a synthetic processed-signal demo, and usage
+  notes kept separate from the resampling-statistics code.
 - **Extended Data Figure 4h-k:** MATLAB plotting and non-parametric analysis of
   visual-cortex calcium traces, orientation-selective cell counts, orientation
   selectivity index, and preferred-orientation stability, paired with the
@@ -25,10 +28,11 @@ reproducible Python scripts supporting the SynC manuscript.
   condition-specific mixture fractions, direct studentized permutation tests
   of re-estimated mixture fractions, and distributional audit.
 
-The website provides method summaries under `/statistical-tests`, MATLAB
-resources under `/matlab-code`, and direct Python downloads under
-`/python-code`. Analysis-specific provenance and execution instructions are
-stored in `public/docs/`.
+The website provides the Figure 4c electrophysiology package under
+`/eeg-analysis`, method summaries under `/statistical-tests`, MATLAB resources
+under `/matlab-code`, and resampling-code downloads under `/python-code`.
+Analysis-specific provenance and execution instructions are stored in
+`public/docs/`.
 
 ## Local development
 
