@@ -196,6 +196,12 @@ def main() -> None:
     parser.add_argument("--parameters", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=Path("Fig6_spine_permutation_results.csv"))
     parser.add_argument("--repetitions", type=int, default=100_000)
+    parser.add_argument(
+        "--fig6h-recovery-repetitions",
+        type=int,
+        default=3_000_000,
+        help="permutations for the borderline Fig. 6h SynC recovery contrast",
+    )
     parser.add_argument("--batch-size", type=int, default=1_000)
     args = parser.parse_args()
 
@@ -248,10 +254,15 @@ def main() -> None:
             }
         )
 
+        pi_repetitions = (
+            args.fig6h_recovery_repetitions
+            if contrast_id == "sync_60_180_vs_0_60"
+            else args.repetitions
+        )
         effect, statistic, p_value = _pi_test(
             ratio_minus_one[permutation_first],
             ratio_minus_one[permutation_second],
-            args.repetitions,
+            pi_repetitions,
             pi_seed,
             args.batch_size,
         )
@@ -268,7 +279,7 @@ def main() -> None:
                 "studentized_statistic": statistic,
                 "p_value": p_value,
                 "seed": pi_seed,
-                "repetitions": args.repetitions,
+                "repetitions": pi_repetitions,
                 "inference_role": role,
             }
         )

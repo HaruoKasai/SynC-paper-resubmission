@@ -116,12 +116,14 @@ fitted fractions. Thus the hypothesis test directly targets the quantity shown
 by the Fig. 6h bars.
 
 The same SynC fixed sequence and descriptive dGAP policy used for Fig. 6g are
-applied. The adopted run uses 100,000 Monte Carlo permutations.
+applied. The adopted run uses 100,000 Monte Carlo permutations unless otherwise
+stated. Because the SynC recovery result was close to the 0.05 threshold, its
+frozen Monte Carlo stream was extended to 3,000,000 permutations.
 
 | Contrast | P |
 | --- | ---: |
 | SynC@FPC before A/C vs 0–1 h after A/C | 0.00509 |
-| SynC@FPC 1–3 h after A/C vs 0–1 h after A/C | 0.0499 |
+| SynC@FPC 1–3 h after A/C vs 0–1 h after A/C | 0.0490 (3,000,000 permutations) |
 | SynC-dGAP@FPC before A/C vs 0–1 h after A/C | 0.802 |
 | SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C | 0.750 |
 

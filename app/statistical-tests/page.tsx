@@ -32,7 +32,7 @@ const deltaVResults = [
 
 const permissiveResults = [
   ["SynC@FPC before A/C vs 0–1 h after A/C", "0.00509"],
-  ["SynC@FPC 1–3 h after A/C vs 0–1 h after A/C", "0.0499"],
+  ["SynC@FPC 1–3 h after A/C vs 0–1 h after A/C", "0.0490"],
   ["SynC-dGAP@FPC before A/C vs 0–1 h after A/C", "0.802"],
   ["SynC-dGAP@FPC 0–1 h after A/C vs 1–3 h after A/C", "0.750"],
 ];
@@ -399,10 +399,12 @@ export default function StatisticalTestsPage() {
             The bars and tests use the same condition-specific mixture fraction
             π. The shared Normal and positive-component parameters were held at
             their frozen Extended Data Fig. 10 values. Group labels were
-            permuted 100,000 times; π was re-estimated separately in both groups
-            for every permutation, and its difference was studentized by the
-            observed information. The SynC contrasts followed the same fixed
-            sequence as Figure 6g; dGAP contrasts were descriptive.
+            permuted 100,000 times unless otherwise stated; π was re-estimated
+            separately in both groups for every permutation, and its difference
+            was studentized by the observed information. The borderline SynC
+            recovery contrast used 3,000,000 permutations. The SynC contrasts
+            followed the same fixed sequence as Figure 6g; dGAP contrasts were
+            descriptive.
           </p>
           <h3>Direct mixture-fraction comparisons</h3>
           <div className="resultTable" role="table" aria-label="Figure 6h P values">
