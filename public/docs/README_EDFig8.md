@@ -203,7 +203,7 @@ written alongside these files.
 From the package root:
 
 ```bash
-pip install "numpy>=1.24,<3" "pandas>=2.0" "matplotlib>=3.7"
+pip install "numpy>=1.24,<3" "pandas>=2.0" "matplotlib>=3.7" "scipy>=1.10"
 python code/EDFig8_laser.py
 python code/EDFig8_food.py
 ```
@@ -221,7 +221,7 @@ Both pipelines have been run end to end on the demonstration dataset
 distributed here; the files listed under **Outputs** are produced without
 further configuration.
 
-The analysis requires Python 3.10+, NumPy, pandas and Matplotlib; no other
-third-party packages are used. The pipelines are compatible with both NumPy 1.x
-and 2.x. On some Linux distributions the standard-library `tkinter` module must
-be installed separately.
+The analysis requires Python 3.10+, NumPy, pandas, Matplotlib and SciPy. The
+pipelines are compatible with both NumPy 1.x and 2.x. On some Linux
+distributions the standard-library `tkinter` module must be installed
+separately.
