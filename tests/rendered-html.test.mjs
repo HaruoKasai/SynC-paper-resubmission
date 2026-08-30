@@ -235,7 +235,7 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   assert.match(testCsv, /0\.012869871301286986/);
   assert.match(testCsv, /0\.007079929200707993/);
   assert.match(testCsv, /0\.005089949100508995/);
-  assert.match(testCsv, /0\.04991950080499195/);
+  assert.match(testCsv, /0\.04899731700089433,2026072902,3000000,secondary/);
   const reportedTests = parseSimpleCsv(testCsv);
   assert.equal(reportedTests.length, 8);
   assert.deepEqual(
@@ -258,7 +258,7 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   assert.doesNotMatch(testCsv, /wt_vs_sync_before/);
   assert.doesNotMatch(testCsv, /sync_before_vs_60_180/);
   assert.match(methodsPage, /Individual stimulated spines are the/);
-  assert.match(methodsPage, /π was re-estimated separately in both groups/);
+  assert.match(methodsPage, /π was re-estimated\s+separately in both groups/);
   assert.match(methodsPage, /SynC@FPC before A\/C vs 0–1 h after A\/C/);
   assert.match(methodsPage, /SynC-dGAP@FPC before A\/C vs 0–1 h after A\/C/);
   assert.doesNotMatch(methodsPage, /parametric-\s+bootstrap/);
