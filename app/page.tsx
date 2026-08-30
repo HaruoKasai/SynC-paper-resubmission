@@ -53,10 +53,6 @@ export default function Home() {
           SynC
         </a>
         <div className="navLinks">
-          <a href="#code">Code</a>
-          <a href="/statistical-tests">Statistics</a>
-          <a href="/python-code">Resampling code</a>
-          <a href="/matlab-code">MATLAB code</a>
           <a
             href="https://github.com/HaruoKasai/SynC-paper-resubmission"
             target="_blank"
