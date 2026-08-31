@@ -81,6 +81,47 @@ const scripts = [
     ],
   },
   {
+    id: "efig6-permutation",
+    detailHref: "/statistical-tests#efig6-permutation",
+    detailLabel: "Read the method description →",
+    label: "Extended Data Figure 6c,f",
+    name: "Exact permutation tests with step-down maxT",
+    description:
+      "Reproduces the mouse-level WT-versus-SynC@FPC AUC comparisons for the laser-dot and food-pellet tasks. Distance and velocity are separate families, and all three displayed periods are retained together under permutation.",
+    files: [
+      {
+        name: "ExtendedDataFig6_exact_permutation_maxT.py",
+        href: "/code/ExtendedDataFig6_exact_permutation_maxT.py",
+        action: "Download Python",
+      },
+      {
+        name: "ExtendedDataFig6c_laser_input.csv",
+        href: "/data/ExtendedDataFig6c_laser_input.csv",
+        action: "Download laser-dot input",
+      },
+      {
+        name: "ExtendedDataFig6f_food_input.csv",
+        href: "/data/ExtendedDataFig6f_food_input.csv",
+        action: "Download food-pellet input",
+      },
+      {
+        name: "ExtendedDataFig6_reported_tests.csv",
+        href: "/data/ExtendedDataFig6_reported_tests.csv",
+        action: "Download reported results",
+      },
+      {
+        name: "ExtendedDataFigure6_source_data.xlsx",
+        href: "/data/ExtendedDataFigure6_source_data.xlsx",
+        action: "Download Source Data workbook",
+      },
+      {
+        name: "README_ExtendedDataFig6_permutation.md",
+        href: "/docs/README_ExtendedDataFig6_permutation.md",
+        action: "Download README",
+      },
+    ],
+  },
+  {
     id: "fig5-permutation",
     detailHref: "/statistical-tests#fig5-permutation",
     detailLabel: "Read the method description →",

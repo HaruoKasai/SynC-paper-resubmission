@@ -295,6 +295,36 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   }
 });
 
+test("publishes the Extended Data Figure 6 permutation package", async () => {
+  const paths = [
+    "public/code/ExtendedDataFig6_exact_permutation_maxT.py",
+    "public/data/ExtendedDataFig6c_laser_input.csv",
+    "public/data/ExtendedDataFig6f_food_input.csv",
+    "public/data/ExtendedDataFig6_reported_tests.csv",
+    "public/data/ExtendedDataFigure6_source_data.xlsx",
+    "public/docs/README_ExtendedDataFig6_permutation.md",
+  ];
+  await Promise.all(paths.map((path) => access(new URL(path, root))));
+
+  const [results, methodsPage, codePage, readme] = await Promise.all([
+    readFile(new URL("public/data/ExtendedDataFig6_reported_tests.csv", root), "utf8"),
+    readFile(new URL("app/statistical-tests/page.tsx", root), "utf8"),
+    readFile(new URL("app/python-code/page.tsx", root), "utf8"),
+    readFile(new URL("public/docs/README_ExtendedDataFig6_permutation.md", root), "utf8"),
+  ]);
+
+  const rows = parseSimpleCsv(results);
+  assert.equal(rows.length, 12);
+  assert.equal(rows.filter((row) => row.figure_label === "**").length, 2);
+  assert.equal(rows.filter((row) => row.figure_label === "n.s.").length, 10);
+  assert.match(results, /0\.0017482517482517483/);
+  assert.match(results, /0\.006526806526806527/);
+  assert.match(results, /0\.06418026418026418,n\.s\./);
+  assert.match(methodsPage, /Extended Data Figure 6c,f/);
+  assert.match(codePage, /ExtendedDataFig6_exact_permutation_maxT\.py/);
+  assert.match(readme, /three displayed periods/);
+});
+
 test("publishes only stable opaque analysis identifiers", async () => {
   const [fovText, spineText] = await Promise.all([
     readFile(new URL("public/data/Fig6_ExFig10_FOV_input.csv", root), "utf8"),

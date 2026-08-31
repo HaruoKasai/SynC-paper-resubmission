@@ -173,6 +173,57 @@ export default function StatisticalTestsPage() {
 
       <article
         className="methodArticle"
+        id="efig6-permutation"
+        aria-label="Extended Data Figure 6 exact permutation analysis"
+      >
+        <section>
+          <p className="sectionLabel">Extended Data Figure 6c,f · Statistical analysis</p>
+          <h2>Mouse-level exact permutation tests</h2>
+          <p>
+            WT and SynC@FPC groups were compared using two-sided studentized
+            exact permutation tests of the AUC. The mouse was the permutation
+            unit: group labels were reassigned while each mouse&apos;s three periods
+            and missing-value pattern remained together.
+          </p>
+          <div className="methodGrid">
+            <div>
+              <span>Laser-dot task</span>
+              <strong>11,440 assignments</strong>
+            </div>
+            <div>
+              <span>Food-pellet task</span>
+              <strong>6,435 assignments</strong>
+            </div>
+            <div>
+              <span>Adjustment</span>
+              <strong>Step-down maxT within each measure</strong>
+            </div>
+          </div>
+          <p>
+            Distance and velocity were separate multiplicity families. Within
+            each measure, Before i.p. A/C, 0–50 min after A/C, and 60–90 min
+            after A/C were adjusted together. Only the 0–50-min distance
+            comparison was significant in each task: adjusted P = 0.00175 for
+            the laser-dot task and P = 0.00653 for the food-pellet task. All
+            other adjusted comparisons were not significant.
+          </p>
+          <div className="articleLinks">
+            <a className="repoLink" href="/python-code#efig6-permutation">
+              Python script, mouse-level inputs, and reported results →
+            </a>
+            <a
+              className="repoLink"
+              href="/docs/README_ExtendedDataFig6_permutation.md"
+              download
+            >
+              Download analysis README
+            </a>
+          </div>
+        </section>
+      </article>
+
+      <article
+        className="methodArticle"
         id="fig5-permutation"
         aria-label="Figure 5 permutation analysis"
       >
