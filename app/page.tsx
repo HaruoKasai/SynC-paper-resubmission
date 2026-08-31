@@ -35,7 +35,7 @@ const codeItems = [
 
 const resamplingItem = {
   title: "Resampling statistics",
-  figure: "Figures 4e, 4g, 5, 6g,h · Extended Data Figures 6c,f and 10",
+  figure: "Figures 4e, 4g, 5e,g and 6g,h · Extended Data Figures 6c,f and 10",
   description:
     "Statistical definitions, frozen inputs, code, and results for mouse-, animal-, population-, and spine-level resampling analyses, with dependence, studentization, fixed-sequence, and step-down maxT choices recorded explicitly.",
   status: "View statistical resources →",
