@@ -38,7 +38,7 @@ export default function EegAnalysisPage() {
         <div className="navLinks">
           <Link href="/">Home</Link>
           <Link href="/matlab-code">MATLAB code</Link>
-          <Link href="/statistical-tests">Resampling statistics</Link>
+          <Link href="/python-code">Resampling statistics</Link>
         </div>
       </nav>
 

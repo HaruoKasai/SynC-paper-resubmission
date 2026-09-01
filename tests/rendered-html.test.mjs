@@ -83,7 +83,6 @@ test("server-renders the analysis resource routes", async () => {
   const cases = [
     ["/", /Rapid associative spine enlargement/],
     ["/eeg-analysis", /EEG\/EMG preprocessing and spectral analysis/],
-    ["/statistical-tests", /Two-sided spine-level studentized permutation/],
     ["/python-code", /Python resampling code and frozen source tables/],
     ["/matlab-code", /MATLAB code and source data for Extended Data Figure 4/],
   ];
@@ -96,6 +95,14 @@ test("server-renders the analysis resource routes", async () => {
     assert.match(html, expected);
     assert.doesNotMatch(html, /Your site is taking shape|codex-preview/);
   }
+});
+
+test("legacy statistical-tests route redirects to the Python catalogue", async () => {
+  const source = await readFile(
+    new URL("app/statistical-tests/page.tsx", root),
+    "utf8",
+  );
+  assert.match(source, /redirect\("\/python-code"\)/);
 });
 
 test("homepage lists all authors and consolidates resampling resources last", async () => {
@@ -133,7 +140,7 @@ test("homepage lists all authors and consolidates resampling resources last", as
   assert.doesNotMatch(html, /Imaging analysis/);
   assert.equal((source.match(/title: "Resampling statistics"/g) ?? []).length, 1);
   assert.doesNotMatch(source, /<h3>Statistical analysis<\/h3>/);
-  assert.match(html, /Figures 4e, 4g, 5, 6g,h/);
+  assert.match(source, /Figures 4e, 4g, 5e,g and 6g,h/);
   assert.ok(source.lastIndexOf("resamplingItem.href") > source.lastIndexOf("codeItems.map"));
 });
 
@@ -204,12 +211,11 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   ];
   await Promise.all(paths.map((path) => access(new URL(path, root))));
 
-  const [fovCsv, spineCsv, testCsv, methodsPage, codePage, methodsReadme, parameters] =
+  const [fovCsv, spineCsv, testCsv, codePage, methodsReadme, parameters] =
     await Promise.all([
       readFile(new URL("public/data/Fig6_ExFig10_FOV_input.csv", root), "utf8"),
       readFile(new URL("public/data/Fig6_ExFig10_spine_input.csv", root), "utf8"),
       readFile(new URL("public/data/Fig6_ExFig10_reported_tests.csv", root), "utf8"),
-      readFile(new URL("app/statistical-tests/page.tsx", root), "utf8"),
       readFile(new URL("app/python-code/page.tsx", root), "utf8"),
       readFile(new URL("public/docs/README_Fig6_ExFig10.md", root), "utf8"),
       readFile(new URL("public/data/Fig6_ExFig10_mixture_parameters.csv", root), "utf8"),
@@ -257,20 +263,9 @@ test("publishes the frozen Fig. 6 and Extended Data Fig. 10 package", async () =
   );
   assert.doesNotMatch(testCsv, /wt_vs_sync_before/);
   assert.doesNotMatch(testCsv, /sync_before_vs_60_180/);
-  assert.match(methodsPage, /Individual stimulated spines are the/);
-  assert.match(methodsPage, /π was re-estimated\s+separately in both groups/);
-  assert.match(methodsPage, /SynC@FPC before A\/C vs 0–1 h after A\/C/);
-  assert.match(methodsPage, /SynC-dGAP@FPC before A\/C vs 0–1 h after A\/C/);
-  assert.doesNotMatch(methodsPage, /parametric-\s+bootstrap/);
-  assert.match(methodsPage, /same condition-specific mixture fraction/);
-  assert.match(methodsPage, /observed information/);
-  assert.match(methodsPage, /Percentograms are used only for visualisation/);
-  assert.doesNotMatch(methodsPage, /WT versus SynC -A\/C uses/);
-  assert.doesNotMatch(methodsPage, /0\.3810|0\.1905/);
   assert.match(codePage, /Fig6_spine_permutation\.py/);
   assert.match(parameters, /pi_WT/);
   assert.doesNotMatch(parameters, /common_pi_sensitivity/);
-  assert.doesNotMatch(methodsPage, /common[- ]prior|π = 0\.242/i);
   assert.doesNotMatch(methodsReadme, /common[- ]prior|pi = 0\.241672/i);
   assert.match(methodsReadme, /WT rows and the frozen `pi_WT` parameter remain/);
   assert.match(methodsReadme, /100,000 Monte Carlo permutations/);
@@ -306,9 +301,8 @@ test("publishes the Extended Data Figure 6 permutation package", async () => {
   ];
   await Promise.all(paths.map((path) => access(new URL(path, root))));
 
-  const [results, methodsPage, codePage, readme] = await Promise.all([
+  const [results, codePage, readme] = await Promise.all([
     readFile(new URL("public/data/ExtendedDataFig6_reported_tests.csv", root), "utf8"),
-    readFile(new URL("app/statistical-tests/page.tsx", root), "utf8"),
     readFile(new URL("app/python-code/page.tsx", root), "utf8"),
     readFile(new URL("public/docs/README_ExtendedDataFig6_permutation.md", root), "utf8"),
   ]);
@@ -320,7 +314,6 @@ test("publishes the Extended Data Figure 6 permutation package", async () => {
   assert.match(results, /0\.0017482517482517483/);
   assert.match(results, /0\.006526806526806527/);
   assert.match(results, /0\.06418026418026418,n\.s\./);
-  assert.match(methodsPage, /Extended Data Figure 6c,f/);
   assert.match(codePage, /ExtendedDataFig6_exact_permutation_maxT\.py/);
   assert.match(readme, /three displayed periods/);
 });

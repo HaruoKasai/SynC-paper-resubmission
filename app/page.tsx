@@ -37,9 +37,9 @@ const resamplingItem = {
   title: "Resampling statistics",
   figure: "Figures 4e, 4g, 5e,g and 6g,h · Extended Data Figures 6c,f and 10",
   description:
-    "Statistical definitions, frozen inputs, code, and results for mouse-, animal-, population-, and spine-level resampling analyses, with dependence, studentization, fixed-sequence, and step-down maxT choices recorded explicitly.",
+    "Downloadable code, frozen inputs, reported results, and analysis-specific README files for the manuscript’s resampling analyses.",
   status: "View statistical resources →",
-  href: "/statistical-tests",
+  href: "/python-code",
 };
 
 export default function Home() {

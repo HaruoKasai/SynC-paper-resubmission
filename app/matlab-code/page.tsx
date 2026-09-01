@@ -38,7 +38,7 @@ export default function MatlabCodePage() {
         <div className="navLinks">
           <Link href="/">Home</Link>
           <Link href="/python-code">Python code</Link>
-          <Link href="/statistical-tests">Statistics</Link>
+          <Link href="/python-code">Resampling statistics</Link>
         </div>
       </nav>
 

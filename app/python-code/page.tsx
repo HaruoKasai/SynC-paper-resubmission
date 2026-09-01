@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 const scripts = [
   {
     id: "fig4e-signflip",
-    detailHref: "/statistical-tests#fig4e-signflip",
-    detailLabel: "Read the method description →",
     label: "Figure 4e",
     name: "Exact sign-flip tests with step-down maxT",
     description:
@@ -41,8 +39,6 @@ const scripts = [
   },
   {
     id: "fig4g-permutation",
-    detailHref: "/statistical-tests#fig4g-permutation",
-    detailLabel: "Read the method description →",
     label: "Figure 4g",
     name: "Exact permutation tests with step-down maxT",
     description:
@@ -82,8 +78,6 @@ const scripts = [
   },
   {
     id: "efig6-permutation",
-    detailHref: "/statistical-tests#efig6-permutation",
-    detailLabel: "Read the method description →",
     label: "Extended Data Figure 6c,f",
     name: "Exact permutation tests with step-down maxT",
     description:
@@ -123,12 +117,10 @@ const scripts = [
   },
   {
     id: "fig5-permutation",
-    detailHref: "/statistical-tests#fig5-permutation",
-    detailLabel: "Read the method description →",
-    label: "Figure 5",
+    label: "Figure 5e,g",
     name: "Paired studentized exact sign-flip permutation test",
     description:
-      "Reproduces the n = 10 Fig. 5 analysis for firing rate, Spearman pairwise correlation, normalised participation ratio, and normalised PC50 in immobile and mobile periods.",
+      "Reproduces the n = 10 Figure 5e,g analysis for firing rate, Spearman pairwise correlation, normalised participation ratio, and normalised PC50 in immobile and mobile periods.",
     files: [
       {
         name: "Fig5_Permutation_test.py",
@@ -149,8 +141,6 @@ const scripts = [
   },
   {
     id: "fig6-permutation",
-    detailHref: "/statistical-tests#fig6-spine-analysis",
-    detailLabel: "Read the method description →",
     label: "Figure 6g,h",
     name: "Spine-level studentized permutation tests",
     description:
@@ -185,8 +175,6 @@ const scripts = [
   },
   {
     id: "exfig10-mixture",
-    detailHref: "/statistical-tests#fig6-spine-analysis",
-    detailLabel: "Read the method description →",
     label: "Extended Data Figure 10",
     name: "Normal-Exponential (Ex-Gaussian) mixture audit",
     description:
@@ -228,7 +216,6 @@ export default function PythonCodePage() {
         </Link>
         <div className="navLinks">
           <Link href="/">Home</Link>
-          <Link href="/statistical-tests">Test descriptions</Link>
           <Link href="/behavioural-analysis">Behavioural analysis</Link>
         </div>
       </nav>
@@ -249,12 +236,6 @@ export default function PythonCodePage() {
               <p className="sectionLabel">{script.label}</p>
               <h2>{script.name}</h2>
               <p>{script.description}</p>
-              <a
-                className="repoLink"
-                href={script.detailHref}
-              >
-                {script.detailLabel}
-              </a>
             </div>
             <div className="filePanel">
               <span>Files</span>

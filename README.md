@@ -32,8 +32,8 @@ reproducible Python scripts supporting the SynC manuscript.
   of re-estimated mixture fractions, and distributional audit.
 
 The website provides the Figure 4c electrophysiology package under
-`/eeg-analysis`, method summaries under `/statistical-tests`, MATLAB resources
-under `/matlab-code`, and resampling-code downloads under `/python-code`.
+`/eeg-analysis`, MATLAB resources under `/matlab-code`, and resampling code,
+inputs, results, and README downloads under `/python-code`.
 Analysis-specific provenance and execution instructions are stored in
 `public/docs/`.
 
