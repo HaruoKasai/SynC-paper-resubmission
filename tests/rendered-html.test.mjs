@@ -105,6 +105,19 @@ test("legacy statistical-tests route redirects to the Python catalogue", async (
   assert.match(source, /redirect\("\/python-code"\)/);
 });
 
+test("links resampling code and README records to GitHub while retaining downloads", async () => {
+  const source = await readFile(new URL("app/python-code/page.tsx", root), "utf8");
+
+  assert.match(
+    source,
+    /https:\/\/github\.com\/HaruoKasai\/SynC-paper-resubmission\/blob\/main\/public/,
+  );
+  assert.match(source, /View code on GitHub ↗/);
+  assert.match(source, /Read README on GitHub ↗/);
+  assert.match(source, /README_Fig6_ExFig10\.md/);
+  assert.match(source, /<a href=\{file\.href\} download>/);
+});
+
 test("homepage lists all authors and consolidates resampling resources last", async () => {
   const response = await render("/");
   const html = await response.text();

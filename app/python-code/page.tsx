@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     "Python resampling scripts and frozen public inputs supporting statistical analyses in the SynC manuscript.",
 };
 
+const githubBlobRoot =
+  "https://github.com/HaruoKasai/SynC-paper-resubmission/blob/main/public";
+
 const scripts = [
   {
     id: "fig4e-signflip",
@@ -200,6 +203,11 @@ const scripts = [
         href: "/data/Fig6_ExFig10_cohort_counts.csv",
         action: "Download cohort counts",
       },
+      {
+        name: "README_Fig6_ExFig10.md",
+        href: "/docs/README_Fig6_ExFig10.md",
+        action: "Download README",
+      },
     ],
   },
 ];
@@ -224,8 +232,9 @@ export default function PythonCodePage() {
         <p className="eyebrow">Resampling statistics</p>
         <h1>Python resampling code and frozen source tables</h1>
         <p className="lead">
-          Downloadable statistical scripts are paired with their exact public
-          inputs, reported results, and method records.
+          Statistical scripts and README records can be read directly on
+          GitHub. Frozen inputs, reported results, and all files remain
+          available for download.
         </p>
       </header>
 
@@ -242,9 +251,29 @@ export default function PythonCodePage() {
               {script.files.map((file) => (
                 <div className="downloadFile" key={file.name}>
                   <strong>{file.name}</strong>
-                  <a href={file.href} download>
-                    {file.action}
-                  </a>
+                  <div className="fileLinks">
+                    {file.name.endsWith(".py") && (
+                      <a
+                        href={`${githubBlobRoot}${file.href}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View code on GitHub ↗
+                      </a>
+                    )}
+                    {file.name.endsWith(".md") && (
+                      <a
+                        href={`${githubBlobRoot}${file.href}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Read README on GitHub ↗
+                      </a>
+                    )}
+                    <a href={file.href} download>
+                      {file.action}
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
